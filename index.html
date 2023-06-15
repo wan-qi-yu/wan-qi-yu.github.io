@@ -84,138 +84,6 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
 <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">创建虚拟环境 pyspark, 基于Python 3.8</span><br><span class="line">conda create -n pyspark python=3.8</span><br><span class="line">切换到虚拟环境内</span><br><span class="line">conda activate pyspark</span><br><span class="line">在虚拟环境内安装包</span><br><span class="line">pip install pyhive pyspark jieba -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></div></figure>
 
 <p><img src="/../image/pyspark/7.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Docker%E9%83%A8%E7%BD%B2/">Docker部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="安装docker"   >
-          <a href="#安装docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1>
-      
-        <h2 id="1、虚拟机联网，安装yum工具"   >
-          <a href="#1、虚拟机联网，安装yum工具" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、虚拟机联网，安装yum工具" class="headerlink" title="1、虚拟机联网，安装yum工具"></a>1、虚拟机联网，安装yum工具</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils \</span><br><span class="line">           device-mapper-persistent-data \</span><br><span class="line">           lvm2 --skip-broken</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/1.png"></p>
-<p><img src="/../image/docker/2.png"></p>
-
-        <h2 id="2、配置网卡转发"   >
-          <a href="#2、配置网卡转发" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、配置网卡转发" class="headerlink" title="2、配置网卡转发"></a>2、配置网卡转发</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.docker必须安装在centos7平台，内核版本不低于3.10在centos平台运行docker可能会遇见些告警信息，修改内核配置参数，打开内核转发功能</span></span><br><span class="line"><span class="comment">#写入</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /etc/sysctl.d/docker.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">net.ipv4.conf.default.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.conf.all.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward=1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"><span class="comment">#2.重新加载内核参数</span></span><br><span class="line">modprobe br_netfilter</span><br><span class="line">sysctl -p /etc/sysctl.d/docker.conf</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/3.png"></p>
-
-        <h2 id="3、利用yum进行docker安装"   >
-          <a href="#3、利用yum进行docker安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、利用yum进行docker安装" class="headerlink" title="3、利用yum进行docker安装"></a>3、利用yum进行docker安装</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提前配置好yum仓库</span></span><br><span class="line"><span class="comment"># 1.阿里云自带仓库 2.阿里云提供的docker专属repo仓库</span></span><br><span class="line"></span><br><span class="line">curl -o /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">curl -o /etc/yum.repos.d/Centos-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/4.png"></p>
-<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#更新yum缓存</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/5.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以直接yum安装docker了</span></span><br><span class="line"><span class="comment">## 查看源中可用版本</span></span><br><span class="line">yum list docker-ce --showduplicates | <span class="built_in">sort</span> -r</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/6.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## yum安装</span></span><br><span class="line">yum install docker-ce -y</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/7.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/8.png"></p>
-
-        <h2 id="4、配置镜像加速器"   >
-          <a href="#4、配置镜像加速器" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、配置镜像加速器" class="headerlink" title="4、配置镜像加速器"></a>4、配置镜像加速器</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用于加速镜像文件下载,选用阿里云镜像站</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line"><span class="built_in">touch</span> /etc/docker/daemon.json</span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span> : [</span><br><span class="line"><span class="string">&quot;https://8xpk5wnt.mirror.aliyuncs.com&quot;</span></span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/9.png"></p>
-<p><img src="/../image/docker/10.png"></p>
-
-        <h2 id="5、启动docker"   >
-          <a href="#5、启动docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、启动docker" class="headerlink" title="5、启动docker"></a>5、启动docker</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动docker前，一定要关闭防火墙后！！</span></span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 禁止开机启动防火墙</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/11.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##通过命令启动docker：</span></span><br><span class="line"><span class="comment">#systemctl start docker  # 启动docker服务</span></span><br><span class="line"><span class="comment">#systemctl stop docker  # 停止docker服务</span></span><br><span class="line"><span class="comment">#systemctl restart docker  # 重启docker服务</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/12.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 查看docker信息</span></span><br><span class="line">docker info</span><br><span class="line">docker ps</span><br><span class="line">docker images</span><br><span class="line">docker version</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/13.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/14.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#再次查看镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/15.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/16.png"></p>
-
-        <h2 id="6、镜像原理"   >
-          <a href="#6、镜像原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#6、镜像原理" class="headerlink" title="6、镜像原理"></a>6、镜像原理</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release </span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/17.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看内核</span></span><br><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/18.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用docker获取不同的发行版镜像（例如centos：7.8.2003）</span></span><br><span class="line">docker pull centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/19.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#确认当前宿主机的发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/20.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行centos:7.8.2003发行版本</span></span><br><span class="line"><span class="comment">#运行容器，且进入容器内部</span></span><br><span class="line"><span class="comment">#参数解释，-i 交互式命令操作 -t 开启一个终端 bash 进入容器后执行的命令</span></span><br><span class="line">docker run -it afb6fca791e0 bash</span><br><span class="line"><span class="comment">#退出容器空间</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/21.png"></p>
-
-        <h2 id="7、获取镜像"   >
-          <a href="#7、获取镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#7、获取镜像" class="headerlink" title="7、获取镜像"></a>7、获取镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker search 镜像名:tag </span></span><br><span class="line"><span class="comment">#tag就是具体的标签版本</span></span><br><span class="line">docker search centos</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/22.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker镜像的存储路径</span></span><br><span class="line">docker info |grep Root</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/23.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#具体位置</span></span><br><span class="line"><span class="built_in">ls</span> /var/lib/docker/image/overlay2/imagedb/content/sha256</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/24.png"></p>
-<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#使用不同的镜像，生成容器</span><br><span class="line"># -it 开启一个交互式的终端--rm 容器退出时删除该容器</span><br><span class="line">#再运行一个7.8centos</span><br><span class="line">docker run -it --rm centos bash</span><br></pre></td></tr></table></div></figure>
-
-
-        <h2 id="8、查看镜像"   >
-          <a href="#8、查看镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#8、查看镜像" class="headerlink" title="8、查看镜像"></a>8、查看镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看所有镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/25.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/26.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只列出镜像id  </span></span><br><span class="line"><span class="comment">#-q –quiet</span></span><br><span class="line">docker images -q</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/27.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化显示镜像</span></span><br><span class="line"><span class="comment">#这是docker的模板语言，--format</span></span><br><span class="line">docker images --format <span class="string">&quot;&#123;&#123;.ID&#125;&#125;--&#123;&#123;.Repository&#125;&#125;&quot;</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/28.png"></p>
-
-        <h2 id="9、删除镜像"   >
-          <a href="#9、删除镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#9、删除镜像" class="headerlink" title="9、删除镜像"></a>9、删除镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除容器记录：</span></span><br><span class="line">docker <span class="built_in">rm</span> 容器<span class="built_in">id</span></span><br><span class="line"><span class="comment">#指定id的前三位即可：</span></span><br><span class="line">docker rmi 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
-
-
-        <h2 id="10、镜像管理"   >
-          <a href="#10、镜像管理" class="heading-link"><i class="fas fa-link"></i></a><a href="#10、镜像管理" class="headerlink" title="10、镜像管理"></a>10、镜像管理</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#批量删除镜像：</span></span><br><span class="line">docker rmi <span class="string">&#x27;docker images -aq&#x27;</span></span><br><span class="line"><span class="comment">#批量删除容器：</span></span><br><span class="line">docker <span class="built_in">rm</span> <span class="string">&#x27;docker ps -aq&#x27;</span></span><br><span class="line"><span class="comment">#导出镜像：</span></span><br><span class="line">docker save -o nginx.tgz nginx:latest<span class="comment">#打包tar包</span></span><br><span class="line"><span class="comment">#导入镜像：</span></span><br><span class="line"><span class="comment">#先删除本地的nginx镜像：</span></span><br><span class="line">docker rmi centos:7.8.2003</span><br><span class="line">docker image load -i /export/software/centos1.8.2003.tgz<span class="comment">#重新加载nginx-tar包</span></span><br><span class="line"><span class="comment">#查看cocker服务的信息：</span></span><br><span class="line">docker info</span><br><span class="line"><span class="comment">#查看镜像详细信息：</span></span><br><span class="line">docker image inspact 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/29.png"></p>
-
-        <h2 id="11、容器操作"   >
-          <a href="#11、容器操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#11、容器操作" class="headerlink" title="11、容器操作"></a>11、容器操作</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建并运行mn容器</span></span><br><span class="line">docker run --name mn -p 80:80 -d nginx</span><br><span class="line"><span class="comment">#运行刚刚创建的nginx容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mn bash</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/30.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入nginx的HTML所在目录 /usr/share/nginx/html</span></span><br><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/31.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改index.html的内容</span></span><br><span class="line">sed -i -e <span class="string">&#x27;s#Welcome to nginx#人工智能学院欢迎您#g&#x27;</span> -e <span class="string">&#x27;s#&lt;head&gt;#&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;#g&#x27;</span> index.html</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/32.png"></p>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Git/">Git部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="一、git下载与安装"   >
           <a href="#一、git下载与安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#一、git下载与安装" class="headerlink" title="一、git下载与安装"></a>一、git下载与安装</h1>
@@ -533,6 +401,138 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
           <a href="#8-查看历史服务器web-ui" class="heading-link"><i class="fas fa-link"></i></a><a href="#8-查看历史服务器web-ui" class="headerlink" title="8.查看历史服务器web ui"></a>8.查看历史服务器web ui</h2>
       <p>打开浏览器</p>
 <p><img src="/../image/37.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Docker%E9%83%A8%E7%BD%B2/">Docker部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="安装docker"   >
+          <a href="#安装docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1>
+      
+        <h2 id="1、虚拟机联网，安装yum工具"   >
+          <a href="#1、虚拟机联网，安装yum工具" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、虚拟机联网，安装yum工具" class="headerlink" title="1、虚拟机联网，安装yum工具"></a>1、虚拟机联网，安装yum工具</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils \</span><br><span class="line">           device-mapper-persistent-data \</span><br><span class="line">           lvm2 --skip-broken</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/1.png"></p>
+<p><img src="/../image/docker/2.png"></p>
+
+        <h2 id="2、配置网卡转发"   >
+          <a href="#2、配置网卡转发" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、配置网卡转发" class="headerlink" title="2、配置网卡转发"></a>2、配置网卡转发</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.docker必须安装在centos7平台，内核版本不低于3.10在centos平台运行docker可能会遇见些告警信息，修改内核配置参数，打开内核转发功能</span></span><br><span class="line"><span class="comment">#写入</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /etc/sysctl.d/docker.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">net.ipv4.conf.default.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.conf.all.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward=1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"><span class="comment">#2.重新加载内核参数</span></span><br><span class="line">modprobe br_netfilter</span><br><span class="line">sysctl -p /etc/sysctl.d/docker.conf</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/3.png"></p>
+
+        <h2 id="3、利用yum进行docker安装"   >
+          <a href="#3、利用yum进行docker安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、利用yum进行docker安装" class="headerlink" title="3、利用yum进行docker安装"></a>3、利用yum进行docker安装</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提前配置好yum仓库</span></span><br><span class="line"><span class="comment"># 1.阿里云自带仓库 2.阿里云提供的docker专属repo仓库</span></span><br><span class="line"></span><br><span class="line">curl -o /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">curl -o /etc/yum.repos.d/Centos-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/4.png"></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#更新yum缓存</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/5.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以直接yum安装docker了</span></span><br><span class="line"><span class="comment">## 查看源中可用版本</span></span><br><span class="line">yum list docker-ce --showduplicates | <span class="built_in">sort</span> -r</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/6.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## yum安装</span></span><br><span class="line">yum install docker-ce -y</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/7.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/8.png"></p>
+
+        <h2 id="4、配置镜像加速器"   >
+          <a href="#4、配置镜像加速器" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、配置镜像加速器" class="headerlink" title="4、配置镜像加速器"></a>4、配置镜像加速器</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用于加速镜像文件下载,选用阿里云镜像站</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line"><span class="built_in">touch</span> /etc/docker/daemon.json</span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span> : [</span><br><span class="line"><span class="string">&quot;https://8xpk5wnt.mirror.aliyuncs.com&quot;</span></span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/9.png"></p>
+<p><img src="/../image/docker/10.png"></p>
+
+        <h2 id="5、启动docker"   >
+          <a href="#5、启动docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、启动docker" class="headerlink" title="5、启动docker"></a>5、启动docker</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动docker前，一定要关闭防火墙后！！</span></span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 禁止开机启动防火墙</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/11.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##通过命令启动docker：</span></span><br><span class="line"><span class="comment">#systemctl start docker  # 启动docker服务</span></span><br><span class="line"><span class="comment">#systemctl stop docker  # 停止docker服务</span></span><br><span class="line"><span class="comment">#systemctl restart docker  # 重启docker服务</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/12.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 查看docker信息</span></span><br><span class="line">docker info</span><br><span class="line">docker ps</span><br><span class="line">docker images</span><br><span class="line">docker version</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/13.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/14.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#再次查看镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/15.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/16.png"></p>
+
+        <h2 id="6、镜像原理"   >
+          <a href="#6、镜像原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#6、镜像原理" class="headerlink" title="6、镜像原理"></a>6、镜像原理</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release </span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/17.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看内核</span></span><br><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/18.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用docker获取不同的发行版镜像（例如centos：7.8.2003）</span></span><br><span class="line">docker pull centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/19.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#确认当前宿主机的发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/20.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行centos:7.8.2003发行版本</span></span><br><span class="line"><span class="comment">#运行容器，且进入容器内部</span></span><br><span class="line"><span class="comment">#参数解释，-i 交互式命令操作 -t 开启一个终端 bash 进入容器后执行的命令</span></span><br><span class="line">docker run -it afb6fca791e0 bash</span><br><span class="line"><span class="comment">#退出容器空间</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/21.png"></p>
+
+        <h2 id="7、获取镜像"   >
+          <a href="#7、获取镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#7、获取镜像" class="headerlink" title="7、获取镜像"></a>7、获取镜像</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker search 镜像名:tag </span></span><br><span class="line"><span class="comment">#tag就是具体的标签版本</span></span><br><span class="line">docker search centos</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/22.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker镜像的存储路径</span></span><br><span class="line">docker info |grep Root</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/23.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#具体位置</span></span><br><span class="line"><span class="built_in">ls</span> /var/lib/docker/image/overlay2/imagedb/content/sha256</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/24.png"></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#使用不同的镜像，生成容器</span><br><span class="line"># -it 开启一个交互式的终端--rm 容器退出时删除该容器</span><br><span class="line">#再运行一个7.8centos</span><br><span class="line">docker run -it --rm centos bash</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="8、查看镜像"   >
+          <a href="#8、查看镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#8、查看镜像" class="headerlink" title="8、查看镜像"></a>8、查看镜像</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看所有镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/25.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/26.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只列出镜像id  </span></span><br><span class="line"><span class="comment">#-q –quiet</span></span><br><span class="line">docker images -q</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/27.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化显示镜像</span></span><br><span class="line"><span class="comment">#这是docker的模板语言，--format</span></span><br><span class="line">docker images --format <span class="string">&quot;&#123;&#123;.ID&#125;&#125;--&#123;&#123;.Repository&#125;&#125;&quot;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/28.png"></p>
+
+        <h2 id="9、删除镜像"   >
+          <a href="#9、删除镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#9、删除镜像" class="headerlink" title="9、删除镜像"></a>9、删除镜像</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除容器记录：</span></span><br><span class="line">docker <span class="built_in">rm</span> 容器<span class="built_in">id</span></span><br><span class="line"><span class="comment">#指定id的前三位即可：</span></span><br><span class="line">docker rmi 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="10、镜像管理"   >
+          <a href="#10、镜像管理" class="heading-link"><i class="fas fa-link"></i></a><a href="#10、镜像管理" class="headerlink" title="10、镜像管理"></a>10、镜像管理</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#批量删除镜像：</span></span><br><span class="line">docker rmi <span class="string">&#x27;docker images -aq&#x27;</span></span><br><span class="line"><span class="comment">#批量删除容器：</span></span><br><span class="line">docker <span class="built_in">rm</span> <span class="string">&#x27;docker ps -aq&#x27;</span></span><br><span class="line"><span class="comment">#导出镜像：</span></span><br><span class="line">docker save -o nginx.tgz nginx:latest<span class="comment">#打包tar包</span></span><br><span class="line"><span class="comment">#导入镜像：</span></span><br><span class="line"><span class="comment">#先删除本地的nginx镜像：</span></span><br><span class="line">docker rmi centos:7.8.2003</span><br><span class="line">docker image load -i /export/software/centos1.8.2003.tgz<span class="comment">#重新加载nginx-tar包</span></span><br><span class="line"><span class="comment">#查看cocker服务的信息：</span></span><br><span class="line">docker info</span><br><span class="line"><span class="comment">#查看镜像详细信息：</span></span><br><span class="line">docker image inspact 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/29.png"></p>
+
+        <h2 id="11、容器操作"   >
+          <a href="#11、容器操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#11、容器操作" class="headerlink" title="11、容器操作"></a>11、容器操作</h2>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建并运行mn容器</span></span><br><span class="line">docker run --name mn -p 80:80 -d nginx</span><br><span class="line"><span class="comment">#运行刚刚创建的nginx容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mn bash</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/30.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入nginx的HTML所在目录 /usr/share/nginx/html</span></span><br><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/31.png"></p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改index.html的内容</span></span><br><span class="line">sed -i -e <span class="string">&#x27;s#Welcome to nginx#人工智能学院欢迎您#g&#x27;</span> -e <span class="string">&#x27;s#&lt;head&gt;#&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;#g&#x27;</span> index.html</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/docker/32.png"></p>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(Local)/">Spark(Local)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="1、环境变量"   >
           <a href="#1、环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、环境变量" class="headerlink" title="1、环境变量"></a>1、环境变量</h1>
@@ -600,34 +600,6 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
 <p>bin&#x2F;pyspark 程序, 可以提供一个交互式的 Python解释器环境, 在这里面可以写普通python代码, 以及spark代码</p>
 <p><img src="/../image/11.png"></p>
 <p><img src="/../image/12.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-07</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
-
-        <h2 id="Quick-Start"   >
-          <a href="#Quick-Start" class="heading-link"><i class="fas fa-link"></i></a><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
-      
-        <h3 id="Create-a-new-post"   >
-          <a href="#Create-a-new-post" class="heading-link"><i class="fas fa-link"></i></a><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Run-server"   >
-          <a href="#Run-server" class="heading-link"><i class="fas fa-link"></i></a><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Generate-static-files"   >
-          <a href="#Generate-static-files" class="heading-link"><i class="fas fa-link"></i></a><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Deploy-to-remote-sites"   >
-          <a href="#Deploy-to-remote-sites" class="heading-link"><i class="fas fa-link"></i></a><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(ha)/">Spark(ha)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>1、启动Zookeeper、HDFS</p>
 <p><img src="/../image/38.png"></p>
 <p>2、在spark-env.sh中, 删除: SPARK_MASTER_HOST&#x3D;node1</p>
@@ -666,4 +638,32 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
 <p><img src="/../image/50.png"></p>
 <p>10、查看node2中master进程</p>
 <p><img src="/../image/51.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-07</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+
+        <h2 id="Quick-Start"   >
+          <a href="#Quick-Start" class="heading-link"><i class="fas fa-link"></i></a><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
+      
+        <h3 id="Create-a-new-post"   >
+          <a href="#Create-a-new-post" class="heading-link"><i class="fas fa-link"></i></a><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="Run-server"   >
+          <a href="#Run-server" class="heading-link"><i class="fas fa-link"></i></a><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="Generate-static-files"   >
+          <a href="#Generate-static-files" class="heading-link"><i class="fas fa-link"></i></a><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="Deploy-to-remote-sites"   >
+          <a href="#Deploy-to-remote-sites" class="heading-link"><i class="fas fa-link"></i></a><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
