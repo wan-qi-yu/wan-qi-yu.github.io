@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="部署Kafka Eagle，完成对kafka集群的基本监控。                     安装配置流程       1、上传安装包到服务器中，解压到&#x2F;export&#x2F;server目录下 12cd &#x2F;export&#x2F;software&#x2F;tar -zxvf kafka-eagle-web-2.0.2-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;   2、设置软连">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在kafka集群中部署Eagle运维监控">
+<meta property="og:url" content="http://example.com/2023/06/25/kafka-eagle/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="部署Kafka Eagle，完成对kafka集群的基本监控。                     安装配置流程       1、上传安装包到服务器中，解压到&#x2F;export&#x2F;server目录下 12cd &#x2F;export&#x2F;software&#x2F;tar -zxvf kafka-eagle-web-2.0.2-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;   2、设置软连">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/eagle/1.png">
+<meta property="og:image" content="http://example.com/image/eagle/2.png">
+<meta property="og:image" content="http://example.com/image/eagle/3.png">
+<meta property="og:image" content="http://example.com/image/eagle/5.png">
+<meta property="og:image" content="http://example.com/image/eagle/6.png">
+<meta property="og:image" content="http://example.com/image/eagle/7.png">
+<meta property="og:image" content="http://example.com/image/eagle/8.png">
+<meta property="og:image" content="http://example.com/image/eagle/9.png">
+<meta property="og:image" content="http://example.com/image/eagle/11.png">
+<meta property="og:image" content="http://example.com/image/eagle/12.png">
+<meta property="og:image" content="http://example.com/image/eagle/13.png">
+<meta property="og:image" content="http://example.com/image/eagle/14.png">
+<meta property="og:image" content="http://example.com/image/eagle/10.png">
+<meta property="article:published_time" content="2023-06-25T06:03:37.927Z">
+<meta property="article:modified_time" content="2023-06-24T14:26:02.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/eagle/1.png"><title>在kafka集群中部署Eagle运维监控 | Hexo</title><link ref="canonical" href="http://example.com/2023/06/25/kafka-eagle/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">在kafka集群中部署Eagle运维监控</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body"><p>部署Kafka Eagle，完成对kafka集群的基本监控。</p>
+
+        <h1 id="安装配置流程"   >
+          <a href="#安装配置流程" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装配置流程" class="headerlink" title="安装配置流程"></a>安装配置流程</h1>
+      <p>1、上传安装包到服务器中，解压到&#x2F;export&#x2F;server目录下</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /export/software/</span><br><span class="line">tar -zxvf kafka-eagle-web-2.0.2-bin.tar.gz -C /export/server/</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/1.png"></p>
+<p>2、设置软连接</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /export/server/kafka-eagle-web-2.0.2/ /export/server/kafka-eagle</span><br></pre></td></tr></table></div></figure>
+
+<p>3、 配置环境变量:JAVA_HOME 和 KE_HOME</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line"># JAVA_HOME(之前配置过的，不用配置，会有冲突，可能无法识别)</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"># KE_HOME</span><br><span class="line">export KE_HOME=/export/server/kafka-eagle</span><br><span class="line">export PATH=$PATH:$KE_HOME/bin</span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+<p>4、 配置 KafkaEagle</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/kafka-eagle/conf </span><br><span class="line">vi system-config.properties</span><br><span class="line"></span><br><span class="line">#需要更改的地方如下图，改为：</span><br><span class="line">kafka.eagle.zk.cluster.alias=cluster1</span><br><span class="line">cluster1.zk.list=node1:2181,node2:2181,node3:2181</span><br><span class="line">cluster1.kafka.eagle.broker.size=3</span><br><span class="line"></span><br><span class="line">kafka.eagle.url=jdbc:sqlite:/export/data/db/ke.db</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/2.png"></p>
+<p><img src="/../image/eagle/3.png"></p>
+<p>5、启动前需要手动创建&#x2F;export&#x2F;data&#x2F;db目录</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /export/data/db</span><br></pre></td></tr></table></div></figure>
+
+<p>6、启动zookeeper</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkall.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/5.png"></p>
+<p>7、启动kafka集群</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kfkall.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/6.png"></p>
+<p><img src="/../image/eagle/7.png"></p>
+<p>8、启动Eagle</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/export/server/kafka-eagle/bin/ke.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/8.png"></p>
+<p>9、网页访问Eagle</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Account:admin </span><br><span class="line"> Password:123456</span><br><span class="line"></span><br><span class="line">http://192.168.88.151:8048</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/eagle/9.png"></p>
+
+        <h1 id="Eagle可视化页面操作"   >
+          <a href="#Eagle可视化页面操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#Eagle可视化页面操作" class="headerlink" title="Eagle可视化页面操作"></a>Eagle可视化页面操作</h1>
+      <p>访问地址：<a href="http://192.168.88.151:8048,输入账号:`admin`;密码:`123456`,登录成功后可以访问到Dashboard。">http://192.168.88.151:8048,输入账号:`admin`;密码:`123456`,登录成功后可以访问到Dashboard。</a></p>
+<p><img src="/../image/eagle/11.png"></p>
+<p>1、创建Topic</p>
+<p><img src="/../image/eagle/12.png"></p>
+<p>2、topic列表</p>
+<p><img src="/../image/eagle/13.png"></p>
+<p>3、消息拟发送</p>
+<p><img src="/../image/eagle/14.png"></p>
+<p>4、查看实时状态监控图</p>
+<p><img src="/../image/eagle/10.png"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">John Doe</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2023/06/25/kafka-eagle/">http://example.com/2023/06/25/kafka-eagle/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/06/25/hello-world/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Hello World</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2023/06/25/Git/"><span class="paginator-prev__text">Git部署</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          安装配置流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Eagle%E5%8F%AF%E8%A7%86%E5%8C%96%E9%A1%B5%E9%9D%A2%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">
+          Eagle可视化页面操作</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="准备工作       安装前需要安装好jdk 检测集群时间是否同步 检测防火墙是否关闭 检测主机 ip映射有没有配置                      解压以及设置软连接       在node1主机上，解压zookeeper的压缩包到&#x2F;export&#x2F;server路径下去，然后准备进行安装 1234cd &#x2F;export&#x2F;softw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper部署">
+<meta property="og:url" content="http://example.com/2023/06/25/zookeeper%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="准备工作       安装前需要安装好jdk 检测集群时间是否同步 检测防火墙是否关闭 检测主机 ip映射有没有配置                      解压以及设置软连接       在node1主机上，解压zookeeper的压缩包到&#x2F;export&#x2F;server路径下去，然后准备进行安装 1234cd &#x2F;export&#x2F;softw">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/zookeeper/1.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/2.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/3.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/4.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/5.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/6.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/7.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/8.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/9.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/10.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/11.png">
+<meta property="og:image" content="http://example.com/image/zookeeper/12.png">
+<meta property="article:published_time" content="2023-06-25T06:03:37.930Z">
+<meta property="article:modified_time" content="2023-06-24T09:08:02.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/zookeeper/1.png"><title>zookeeper部署 | Hexo</title><link ref="canonical" href="http://example.com/2023/06/25/zookeeper%E9%83%A8%E7%BD%B2/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">zookeeper部署</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body">
+        <h1 id="准备工作"   >
+          <a href="#准备工作" class="heading-link"><i class="fas fa-link"></i></a><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1>
+      <p>安装前需要安装好jdk</p>
+<p>检测集群时间是否同步</p>
+<p>检测防火墙是否关闭</p>
+<p>检测主机 ip映射有没有配置</p>
+<p><img src="/../image/zookeeper/1.png"></p>
+
+        <h1 id="解压以及设置软连接"   >
+          <a href="#解压以及设置软连接" class="heading-link"><i class="fas fa-link"></i></a><a href="#解压以及设置软连接" class="headerlink" title="解压以及设置软连接"></a>解压以及设置软连接</h1>
+      <p>在node1主机上，解压zookeeper的压缩包到&#x2F;export&#x2F;server路径下去，然后准备进行安装</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /export/software</span><br><span class="line">tar -zxvf zookeeper.tar.gz -C /export/server/</span><br><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper/ zookeeper</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/2.png"></p>
+
+        <h1 id="环境变量"   >
+          <a href="#环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1>
+      <p>修改环境变量（注意：3台zookeeper都需要修改）</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">export ZOOKEEPER_HOME=/export/server/zookeeper</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="配置文件"   >
+          <a href="#配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1>
+      <p>修改Zookeeper配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/zookeeper/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line">mkdir -p /export/data/zookeeper/zkdatas/</span><br><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="添加myid配置"   >
+          <a href="#添加myid配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#添加myid配置" class="headerlink" title="添加myid配置"></a>添加myid配置</h1>
+      <p>在node1主机的&#x2F;export&#x2F;data&#x2F;zookeeper&#x2F;zkdatas这个路径下创建一个文件，文件名为myid ,文件内容为1</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /export/data/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/3.png"></p>
+
+        <h1 id="安装包分发并修改myid的值"   >
+          <a href="#安装包分发并修改myid的值" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装包分发并修改myid的值" class="headerlink" title="安装包分发并修改myid的值"></a>安装包分发并修改myid的值</h1>
+      <p>在node1主机上，将安装包分发到其他机器</p>
+<p>第一台机器上面执行以下两个命令</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">scp -r /export/server/zookeeper-3.4.6/ root@node2:/export/server/</span><br><span class="line">scp -r /export/server/zookeeper-3.4.6/ root@node2:/export/server/</span><br></pre></td></tr></table></div></figure>
+
+<p>第二台机器上建立软连接, 并修改myid的值为2</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper-3.4.6/ zookeeper</span><br><span class="line">echo 2 &gt; /export/data/zookeeper/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+<p>第三台机器上建立软连接, 并修改myid的值为3</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper-3.4.6/ zookeeper</span><br><span class="line">echo 3 &gt; /export/data/zookeeper/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="三台机器启动zookeeper服务"   >
+          <a href="#三台机器启动zookeeper服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#三台机器启动zookeeper服务" class="headerlink" title="三台机器启动zookeeper服务"></a>三台机器启动zookeeper服务</h1>
+      <p>三台机器分别启动zookeeper服务</p>
+<p>这个命令三台机器都要执行</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/export/server/zookeeper/bin/zkServer.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/4.png"></p>
+<p><img src="/../image/zookeeper/5.png"></p>
+<p><img src="/../image/zookeeper/6.png"></p>
+<p>三台主机分别查看启动状态</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/export/server/zookeeper/bin/zkServer.sh status</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/7.png"></p>
+<p><img src="/../image/zookeeper/8.png"></p>
+<p><img src="/../image/zookeeper/9.png"></p>
+
+        <h1 id="启动（每台机器）"   >
+          <a href="#启动（每台机器）" class="heading-link"><i class="fas fa-link"></i></a><a href="#启动（每台机器）" class="headerlink" title="启动（每台机器）"></a>启动（每台机器）</h1>
+      <p>zkServer.sh start</p>
+<p>编写一个脚本来批量启动所有机器</p>
+<p>1.创建&#x2F;export&#x2F;server&#x2F;start&#x2F;zk_start目录</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /export/shell</span><br></pre></td></tr></table></div></figure>
+
+<p>2.编辑创建zkall.sh</p>
+<p><img src="/../image/zookeeper/10.png"></p>
+<p>3.写shell脚本</p>
+<p><img src="/../image/zookeeper/11.png"></p>
+<p>4.配置zk脚本环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#ZOOKEEPER_SHELL_HOME</span><br><span class="line">export ZKS_HOME=/export/shell/</span><br><span class="line">export PATH=$PATH:$ZKS_HOME</span><br></pre></td></tr></table></div></figure>
+
+<p>5.zookeeper的环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZK_HOME=/export/server/zookeeper</span><br><span class="line">export PATH=$&#123;ZK_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></div></figure>
+
+<p>6.让环境变量生效</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+<p>7.启动测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /export/shell/zkall.sh</span><br><span class="line">zkall.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/12.png"></p>
+<p>启动成功，测试结束</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">John Doe</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2023/06/25/zookeeper%E9%83%A8%E7%BD%B2/">http://example.com/2023/06/25/zookeeper%E9%83%A8%E7%BD%B2/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/06/25/Sqoop%E9%85%8D%E7%BD%AE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Sqoop配置</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2023/06/25/spark%E5%AE%9E%E8%AE%AD/"><span class="paginator-prev__text">saprk</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">
+          准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E4%BB%A5%E5%8F%8A%E8%AE%BE%E7%BD%AE%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">
+          解压以及设置软连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">
+          环境变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">
+          配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0myid%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">
+          添加myid配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85%E5%88%86%E5%8F%91%E5%B9%B6%E4%BF%AE%E6%94%B9myid%E7%9A%84%E5%80%BC"><span class="toc-number">6.</span> <span class="toc-text">
+          安装包分发并修改myid的值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%AF%E5%8A%A8zookeeper%E6%9C%8D%E5%8A%A1"><span class="toc-number">7.</span> <span class="toc-text">
+          三台机器启动zookeeper服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%EF%BC%88%E6%AF%8F%E5%8F%B0%E6%9C%BA%E5%99%A8%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">
+          启动（每台机器）</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>

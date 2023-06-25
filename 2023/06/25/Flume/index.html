@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="安装flume       Flume下载地址：http:&#x2F;&#x2F;flume.apache.org&#x2F;download.html                     解压       123cd &#x2F;export&#x2F;server&#x2F;flume&#x2F;ls# 将 apache-flume-1.9.0-bin.tar.gz下载到CentOS系统中，对其解压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flume">
+<meta property="og:url" content="http://example.com/2023/06/25/Flume/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="安装flume       Flume下载地址：http:&#x2F;&#x2F;flume.apache.org&#x2F;download.html                     解压       123cd &#x2F;export&#x2F;server&#x2F;flume&#x2F;ls# 将 apache-flume-1.9.0-bin.tar.gz下载到CentOS系统中，对其解压">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/flume/1.png">
+<meta property="og:image" content="http://example.com/image/flume/2.png">
+<meta property="og:image" content="http://example.com/image/flume/3.png">
+<meta property="og:image" content="http://example.com/image/flume/4.png">
+<meta property="og:image" content="http://example.com/image/flume/5.png">
+<meta property="og:image" content="http://example.com/image/flume/6.png">
+<meta property="og:image" content="http://example.com/image/flume/7.png">
+<meta property="og:image" content="http://example.com/image/flume/8.png">
+<meta property="og:image" content="http://example.com/image/flume/9.png">
+<meta property="og:image" content="http://example.com/image/flume/10.png">
+<meta property="og:image" content="http://example.com/image/flume/11.png">
+<meta property="article:published_time" content="2023-06-25T06:03:37.927Z">
+<meta property="article:modified_time" content="2023-06-24T10:08:08.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/flume/1.png"><title>Flume | Hexo</title><link ref="canonical" href="http://example.com/2023/06/25/Flume/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Flume</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body">
+        <h1 id="安装flume"   >
+          <a href="#安装flume" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装flume" class="headerlink" title="安装flume"></a>安装flume</h1>
+      <p>Flume下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://flume.apache.org/download.html" >http://flume.apache.org/download.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h1 id="解压"   >
+          <a href="#解压" class="heading-link"><i class="fas fa-link"></i></a><a href="#解压" class="headerlink" title="解压"></a>解压</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/flume/</span><br><span class="line">ls</span><br><span class="line"># 将 apache-flume-1.9.0-bin.tar.gz下载到CentOS系统中，对其解压</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/1.png"></p>
+
+        <h1 id="添加软连接"   >
+          <a href="#添加软连接" class="heading-link"><i class="fas fa-link"></i></a><a href="#添加软连接" class="headerlink" title="添加软连接"></a>添加软连接</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s apache-flume-1.9.0-bin flume</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="配置环境变量"   >
+          <a href="#配置环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1>
+      <p>在&#x2F;etc&#x2F;profile文件中添加以下语句</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#FLUME_HOME</span><br><span class="line">export FLUME_HOME=/export/server/flume</span><br><span class="line">export PATH=$PATH:$FLUME_HOME/bin</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="查看是否设置成功"   >
+          <a href="#查看是否设置成功" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看是否设置成功" class="headerlink" title="查看是否设置成功"></a>查看是否设置成功</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $FLUME_HOME</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/2.png"></p>
+
+        <h1 id="安装netcat"   >
+          <a href="#安装netcat" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装netcat" class="headerlink" title="安装netcat"></a>安装netcat</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nc</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="添加配置文件"   >
+          <a href="#添加配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h1>
+      <p>在netcat-logger.conf中添加以下语句</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># example1-netcat-logger.conf: 单节点Flume配置</span><br><span class="line"># 定义agent名称为a1</span><br><span class="line"># 设置3个组件的名称</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"># 配置source类型为NetCat,监听地址为本机，端口为44444</span><br><span class="line">a1.sources.r1.type = netcat</span><br><span class="line">a1.sources.r1.bind = 0.0.0.0</span><br><span class="line">a1.sources.r1.port = 44444</span><br><span class="line">#source和channel关联</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line"># 配置channel类型为内存，内存队列最大容量为1000，一个事务中从source接收的Events数量或者发送给sink的Events数量最大为100</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"># 配置sink类型为Logger</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line"># 将sink绑定到channel上</span><br><span class="line">a1.sinks.k1.channel = c1</span><br><span class="line">启动agent</span><br><span class="line">bin/flume-ng agent -n a1 -c conf -f myconf/example1-netcat-logger.conf -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="使用Netcat测试"   >
+          <a href="#使用Netcat测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用Netcat测试" class="headerlink" title="使用Netcat测试"></a>使用Netcat测试</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc node1 44444</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/3.png"></p>
+
+        <h1 id="exec-source测试"   >
+          <a href="#exec-source测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#exec-source测试" class="headerlink" title="exec_source测试"></a>exec_source测试</h1>
+      <p>在example2-exec-source-logger.conf添加以下语句</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># example2-exec-source-logger.conf</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.channels = c1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.sources.r1.type = exec</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sources.r1.command = tail -F /export/data/flume-example-data/shell/access.log </span><br><span class="line">a1.sources.r1.batchSize = 100</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动测试</span><br><span class="line">bin/flume-ng agent -n a1 -c conf/ -f myconf/example2-exec-source-logger.conf -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/4.png"></p>
+
+        <h1 id="spooldir-source测试"   >
+          <a href="#spooldir-source测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#spooldir-source测试" class="headerlink" title="spooldir_source测试"></a>spooldir_source测试</h1>
+      <p>配置文件</p>
+<p>在example3-spooldir-source.conf文件中添加以下语句</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># example3-spooldir-source.conf</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.channels = c1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sources.r1.type = spooldir</span><br><span class="line">a1.sources.r1.spoolDir = /export/data/flume-example-data/weblog </span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></div></figure>
+
+<p>启动测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/flume-ng agent -n a1 -c conf -f myconf/example3-spooldir-source.conf -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/5.png"></p>
+
+        <h1 id="taildir-source测试"   >
+          <a href="#taildir-source测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#taildir-source测试" class="headerlink" title="taildir_source测试"></a>taildir_source测试</h1>
+      <p>配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#example4-taildir-source.conf</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line">a1.sources.r1.type = TAILDIR</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sources.r1.positionFile = /export/data/flume-example-data/flumedata/taildir_position.json</span><br><span class="line">a1.sources.r1.filegroups = g1 g2</span><br><span class="line">a1.sources.r1.filegroups.g1 = /export/data/flume-example-data/weblog/web.*</span><br><span class="line">a1.sources.r1.filegroups.g2 = /export/data/flume-example-data/wxlog/wx.*</span><br><span class="line">a1.sources.r1.fileHeader = true</span><br><span class="line">#动态的header-keys eg：filepath=/../../../</span><br><span class="line">a1.sources.r1.fileHeaderKey = filepath</span><br><span class="line"></span><br><span class="line">#写死的header-keys（静态的） eg:a1 = aa1</span><br><span class="line">a1.sources.r1.headers.g1.a1 = aa1</span><br><span class="line">a1.sources.r1.headers.g1.b1 = bb1</span><br><span class="line">a1.sources.r1.headers.g2.a2 = aa2</span><br><span class="line">a1.sources.r1.headers.g2.b2 = bb2</span><br><span class="line"></span><br><span class="line">a1.sources.r1.maxBatchCount = 1000</span><br><span class="line"></span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 10000</span><br><span class="line">a1.channels.c1.transactionCapacity = 1000</span><br><span class="line"></span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></div></figure>
+
+<p>启动测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/flume-ng agent -n a1 -c conf/ -f  myconf/example4-taildir-source.conf -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/6.png"></p>
+
+        <h1 id="avro-source"   >
+          <a href="#avro-source" class="heading-link"><i class="fas fa-link"></i></a><a href="#avro-source" class="headerlink" title="avro source"></a>avro source</h1>
+      <p>配置文件</p>
+<p>在example5-avro-source.conf文件中添加以下语句</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#example5-avro-source.conf</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sources.r1.type = avro</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sources.r1.bind = 0.0.0.0</span><br><span class="line">a1.sources.r1.port = 4141</span><br><span class="line"></span><br><span class="line">a1.channels = c1</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 200</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"></span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></div></figure>
+
+<p>启动测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动agent</span><br><span class="line">bin/flume-ng agent -c conf -f  myconf/example5-avro-source.conf -n a1 -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/7.png"></p>
+
+        <h1 id="利用avro-source-和avro-sink实现agent级联"   >
+          <a href="#利用avro-source-和avro-sink实现agent级联" class="heading-link"><i class="fas fa-link"></i></a><a href="#利用avro-source-和avro-sink实现agent级联" class="headerlink" title="利用avro source 和avro sink实现agent级联"></a>利用avro source 和avro sink实现agent级联</h1>
+      <p>上游服务器配置 example7-1-taildir-f-avro.conf</p>
+<p><img src="/../image/flume/8.png"></p>
+<p>下游服务器配置 example7-2-avro-f-hdfs.conf</p>
+<p><img src="/../image/flume/9.png"></p>
+<p>根据级联操作手册生成相应数据</p>
+<p><img src="/../image/flume/10.png"></p>
+
+        <h1 id="拦截器"   >
+          <a href="#拦截器" class="heading-link"><i class="fas fa-link"></i></a><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h1>
+      <p>配置</p>
+<p>在myconf中添加example8-interceptor.conf</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># example8-interceptor.conf</span><br><span class="line"># 定义agent名称为a1</span><br><span class="line"># 设置3个组件的名称</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line"># 配置source类型为NetCat,监听地址为本机，端口为44444</span><br><span class="line">a1.sources.r1.type = netcat</span><br><span class="line">a1.sources.r1.bind = 0.0.0.0</span><br><span class="line">a1.sources.r1.port = 44444</span><br><span class="line"># 配置拦截器为host</span><br><span class="line">a1.sources.r1.interceptors = i1 </span><br><span class="line">a1.sources.r1.interceptors.i1.type = host</span><br><span class="line"></span><br><span class="line"># 配置sink类型为Logger</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line"></span><br><span class="line"># 配置channel类型为内存，内存队列最大容量为1000，一个事务中从source接收的Events数量或者发送给sink的Events数量最大为100</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"></span><br><span class="line"># 将source和sink绑定到channel上</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sinks.k1.channel = c1</span><br><span class="line">启动flume</span><br><span class="line">bin/flume-ng agent -n a1 -c conf -f myconf/example8-interceptor.conf -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/flume/11.png"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">John Doe</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2023/06/25/Flume/">http://example.com/2023/06/25/Flume/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/06/25/Spark(ha)/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Spark(ha)</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2023/06/25/Docker%E9%83%A8%E7%BD%B2/"><span class="paginator-prev__text">Docker部署</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85flume"><span class="toc-number">1.</span> <span class="toc-text">
+          安装flume</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B"><span class="toc-number">2.</span> <span class="toc-text">
+          解压</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text">
+          添加软连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">
+          配置环境变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E8%AE%BE%E7%BD%AE%E6%88%90%E5%8A%9F"><span class="toc-number">5.</span> <span class="toc-text">
+          查看是否设置成功</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85netcat"><span class="toc-number">6.</span> <span class="toc-text">
+          安装netcat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">
+          添加配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Netcat%E6%B5%8B%E8%AF%95"><span class="toc-number">8.</span> <span class="toc-text">
+          使用Netcat测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec-source%E6%B5%8B%E8%AF%95"><span class="toc-number">9.</span> <span class="toc-text">
+          exec_source测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#spooldir-source%E6%B5%8B%E8%AF%95"><span class="toc-number">10.</span> <span class="toc-text">
+          spooldir_source测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#taildir-source%E6%B5%8B%E8%AF%95"><span class="toc-number">11.</span> <span class="toc-text">
+          taildir_source测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#avro-source"><span class="toc-number">12.</span> <span class="toc-text">
+          avro source</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8avro-source-%E5%92%8Cavro-sink%E5%AE%9E%E7%8E%B0agent%E7%BA%A7%E8%81%94"><span class="toc-number">13.</span> <span class="toc-text">
+          利用avro source 和avro sink实现agent级联</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">14.</span> <span class="toc-text">
+          拦截器</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>

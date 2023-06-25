@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="一、git下载与安装       git下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download  附件：  git安装： 1、按照附件的顺序，直接下一步安装即可。 2、安装的过程中需要填写一个邮箱和用户名(任意即可) 3、安装完毕请重启资源管理器,或者重启电脑 4、更改语言                        二、git工作流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git部署">
+<meta property="og:url" content="http://example.com/2023/06/25/Git/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、git下载与安装       git下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download  附件：  git安装： 1、按照附件的顺序，直接下一步安装即可。 2、安装的过程中需要填写一个邮箱和用户名(任意即可) 3、安装完毕请重启资源管理器,或者重启电脑 4、更改语言                        二、git工作流程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/git/1.png">
+<meta property="og:image" content="http://example.com/image/git/2.png">
+<meta property="og:image" content="http://example.com/image/git/3.png">
+<meta property="og:image" content="http://example.com/image/git/4.png">
+<meta property="og:image" content="http://example.com/image/git/5.png">
+<meta property="og:image" content="http://example.com/image/git/6.png">
+<meta property="og:image" content="http://example.com/image/git/7.png">
+<meta property="og:image" content="http://example.com/image/git/8.png">
+<meta property="og:image" content="http://example.com/image/git/9.png">
+<meta property="og:image" content="http://example.com/image/git/10.png">
+<meta property="og:image" content="http://example.com/image/git/11.png">
+<meta property="og:image" content="http://example.com/image/git/12.png">
+<meta property="og:image" content="http://example.com/image/git/13.png">
+<meta property="og:image" content="http://example.com/image/git/14.png">
+<meta property="og:image" content="http://example.com/image/git/15.png">
+<meta property="og:image" content="http://example.com/image/git/16.png">
+<meta property="og:image" content="http://example.com/image/git/17.png">
+<meta property="og:image" content="http://example.com/image/git/18.png">
+<meta property="og:image" content="http://example.com/image/git/19.png">
+<meta property="og:image" content="http://example.com/image/git/20.png">
+<meta property="og:image" content="http://example.com/image/git/21.png">
+<meta property="og:image" content="http://example.com/image/git/22.png">
+<meta property="og:image" content="http://example.com/image/git/23.png">
+<meta property="og:image" content="http://example.com/image/git/24.png">
+<meta property="og:image" content="http://example.com/image/git/25.png">
+<meta property="og:image" content="http://example.com/image/git/26.png">
+<meta property="og:image" content="http://example.com/image/git/27.png">
+<meta property="og:image" content="http://example.com/image/git/28.png">
+<meta property="og:image" content="http://example.com/image/git/29.png">
+<meta property="og:image" content="http://example.com/image/git/30.png">
+<meta property="og:image" content="http://example.com/image/git/31.png">
+<meta property="og:image" content="http://example.com/image/git/32.png">
+<meta property="og:image" content="http://example.com/image/git/33.png">
+<meta property="og:image" content="http://example.com/image/git/34.png">
+<meta property="og:image" content="http://example.com/image/git/35.png">
+<meta property="og:image" content="http://example.com/image/git/36.png">
+<meta property="og:image" content="http://example.com/image/git/37.png">
+<meta property="og:image" content="http://example.com/image/git/38.png">
+<meta property="og:image" content="http://example.com/image/git/39.png">
+<meta property="og:image" content="http://example.com/image/git/40.png">
+<meta property="og:image" content="http://example.com/image/git/41.png">
+<meta property="og:image" content="http://example.com/image/git/42.png">
+<meta property="og:image" content="http://example.com/image/git/43.png">
+<meta property="og:image" content="http://example.com/image/git/44.png">
+<meta property="og:image" content="http://example.com/image/git/45.png">
+<meta property="og:image" content="http://example.com/image/git/46.png">
+<meta property="og:image" content="d:/nodejs/j_test/source/image/git/47.png">
+<meta property="og:image" content="http://example.com/image/git/48.png">
+<meta property="og:image" content="http://example.com/image/git/49.png">
+<meta property="article:published_time" content="2023-06-25T06:03:37.926Z">
+<meta property="article:modified_time" content="2023-06-14T03:14:18.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/git/1.png"><title>Git部署 | Hexo</title><link ref="canonical" href="http://example.com/2023/06/25/Git/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Git部署</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body">
+        <h1 id="一、git下载与安装"   >
+          <a href="#一、git下载与安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#一、git下载与安装" class="headerlink" title="一、git下载与安装"></a>一、git下载与安装</h1>
+      <p>git下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://git-scm.com/download" >https://git-scm.com/download</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><img src="/../image/git/1.png"></p>
+<p>附件：</p>
+<p><img src="/../image/git/2.png"></p>
+<p>git安装：</p>
+<p>1、按照附件的顺序，直接下一步安装即可。</p>
+<p>2、安装的过程中需要填写一个邮箱和用户名(任意即可)</p>
+<p>3、安装完毕请重启资源管理器,或者重启电脑</p>
+<p>4、更改语言</p>
+<p><img src="/../image/git/3.png"></p>
+<p><img src="/../image/git/4.png"></p>
+<p><img src="/../image/git/5.png"></p>
+
+        <h1 id="二、git工作流程"   >
+          <a href="#二、git工作流程" class="heading-link"><i class="fas fa-link"></i></a><a href="#二、git工作流程" class="headerlink" title="二、git工作流程"></a>二、git工作流程</h1>
+      
+        <h2 id="git初始化"   >
+          <a href="#git初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#git初始化" class="headerlink" title="git初始化"></a>git初始化</h2>
+      <p>初始化一个本地仓库，创建的文件夹下有一个.git 文件生成</p>
+<p> (1)、新建测试文件夹</p>
+<p><img src="/../image/git/6.png"></p>
+<p>(2)、进入文件夹，右键创建版本库</p>
+<p><img src="/../image/git/7.png"></p>
+<p><img src="/../image/git/8.png"></p>
+
+        <h2 id="git添加文件"   >
+          <a href="#git添加文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#git添加文件" class="headerlink" title="git添加文件"></a>git添加文件</h2>
+      <p>(1)、在本地仓库中新建一个文本文件</p>
+<p><img src="/../image/git/9.png"></p>
+<p>(2)、选中新建的文件 –&gt;右键 –&gt;TortoiseGit –&gt; 添加</p>
+<p><img src="/../image/git/10.png"></p>
+
+        <h2 id="修改文件，与再次提交文件"   >
+          <a href="#修改文件，与再次提交文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#修改文件，与再次提交文件" class="headerlink" title="修改文件，与再次提交文件"></a>修改文件，与再次提交文件</h2>
+      <p>修改文件以后,文件上多了一个红色感叹号,表示上次提交后该文件被修改过提交后文件图标又变成绿色</p>
+<p>（1）、修改文件</p>
+<p><img src="/../image/git/11.png" alt="11"></p>
+<p>（2）、再次提交</p>
+<p><img src="/../image/git/12.png"></p>
+
+        <h2 id="修改文件-不提交和上一个版本比较差异-diff"   >
+          <a href="#修改文件-不提交和上一个版本比较差异-diff" class="heading-link"><i class="fas fa-link"></i></a><a href="#修改文件-不提交和上一个版本比较差异-diff" class="headerlink" title="修改文件,不提交和上一个版本比较差异(diff)"></a>修改文件,不提交和上一个版本比较差异(diff)</h2>
+      <p>1、修改文件，但不提交</p>
+<p>2、选中文件–&gt;右键–&gt; TortoiseGit–&gt; 比较差异</p>
+<p><img src="/../image/git/13.png"></p>
+
+        <h2 id="查看提交历史记录"   >
+          <a href="#查看提交历史记录" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看提交历史记录" class="headerlink" title="查看提交历史记录"></a>查看提交历史记录</h2>
+      <p>1、选中文件</p>
+<p>2、右键–&gt; TortoiseGit–&gt; 显示日志</p>
+<p><img src="/../image/git/14.png"></p>
+
+        <h2 id="回退至历史版本"   >
+          <a href="#回退至历史版本" class="heading-link"><i class="fas fa-link"></i></a><a href="#回退至历史版本" class="headerlink" title="回退至历史版本"></a>回退至历史版本</h2>
+      <p>1、右键–&gt; TortoiseGit–&gt; 显示日志</p>
+<p>2、选中某个版本–&gt; 进行如下操作</p>
+<p><img src="/../image/git/15.png" alt="15"></p>
+<p><img src="/../image/git/16.png"></p>
+<p><img src="/../image/git/17.png"></p>
+
+        <h2 id="本地删除与恢复"   >
+          <a href="#本地删除与恢复" class="heading-link"><i class="fas fa-link"></i></a><a href="#本地删除与恢复" class="headerlink" title="本地删除与恢复"></a>本地删除与恢复</h2>
+      <p>直接选中文件删除的话,其实只是删除了本地工作区的文件,并没有删除远程仓库中的文件  随时可以回退的, 比如进行如下操作</p>
+<p>1、文件删除</p>
+<p><img src="/../image/git/18.png"></p>
+<p>2、空白处右键–&gt; TortoiseGit–&gt; 还原（文件又被恢复了）</p>
+<p><img src="/../image/git/19.png"></p>
+
+        <h2 id="从版本库中删除"   >
+          <a href="#从版本库中删除" class="heading-link"><i class="fas fa-link"></i></a><a href="#从版本库中删除" class="headerlink" title="从版本库中删除"></a>从版本库中删除</h2>
+      <p>想要将某个文件从服务器删除,需要进行如下操作</p>
+<p>1、删除文件,和上面的操作一样</p>
+<p><img src="/../image/git/20.png"></p>
+<p>2、提交,此时服务文件已经删除了(历史版本还在,还是可以恢复)</p>
+<p><img src="/../image/git/21.png"></p>
+
+        <h2 id="从版本库删除-但是不删除本地"   >
+          <a href="#从版本库删除-但是不删除本地" class="heading-link"><i class="fas fa-link"></i></a><a href="#从版本库删除-但是不删除本地" class="headerlink" title="从版本库删除,但是不删除本地"></a>从版本库删除,但是不删除本地</h2>
+      <p>可以如下操作,只删除服务器上的文件,但是本地文件并不删除，删除之后需要提交,才会真正的从服务器删除</p>
+<p>选中文件–&gt; TortoiseGit–&gt; 删除并保留本地副本</p>
+<p><img src="/../image/git/22.png"></p>
+
+        <h2 id="忽略提交"   >
+          <a href="#忽略提交" class="heading-link"><i class="fas fa-link"></i></a><a href="#忽略提交" class="headerlink" title="忽略提交"></a>忽略提交</h2>
+      <p>有时候一些文件是不需要提交的比如说idea&#x2F;eclipse 开发的代码自动生成的配置文件，接下来配置不提交</p>
+<p><img src="/../image/git/23.png"></p>
+<p><img src="/../image/git/24.png"></p>
+<p><img src="/../image/git/25.png"></p>
+
+        <h1 id="TortoiseGit-操作本地仓库-分支"   >
+          <a href="#TortoiseGit-操作本地仓库-分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#TortoiseGit-操作本地仓库-分支" class="headerlink" title="TortoiseGit 操作本地仓库(分支)"></a>TortoiseGit 操作本地仓库(分支)</h1>
+      
+        <h2 id="创建分支"   >
+          <a href="#创建分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2>
+      <p>默认情况下使用主分支(master)，在主分支上操作创建分支</p>
+<p>空白处右键–&gt; TortoiseGit–&gt; 创建分支</p>
+<p><img src="/../image/git/26.png"></p>
+
+        <h2 id="查看分支"   >
+          <a href="#查看分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
+<p><img src="/../image/git/27.png"></p>
+
+        <h2 id="切换分支"   >
+          <a href="#切换分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 切换&#x2F;检出</p>
+<p><img src="/../image/git/28.png"></p>
+<p><img src="/../image/git/29.png"></p>
+
+        <h2 id="分支的合并"   >
+          <a href="#分支的合并" class="heading-link"><i class="fas fa-link"></i></a><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h2>
+      <p>将代码切换到分支1,然后写属于需求1 的代码并提交，把需求1 开发完毕通过合并分支把需求1 的代码合并到主分支</p>
+<p>1、切换到主版本</p>
+<p>2、合并即可将需求1写的代码合并至主分支</p>
+<p>空白处右键–&gt; TortoiseGit–&gt; 合并</p>
+<p><img src="/../image/git/30.png"></p>
+<p><img src="/../image/git/31.png"></p>
+
+        <h2 id="删除分支"   >
+          <a href="#删除分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
+<p><img src="/../image/git/32.png"></p>
+
+        <h2 id="冲突处理"   >
+          <a href="#冲突处理" class="heading-link"><i class="fas fa-link"></i></a><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h2>
+      <p>1、创建名为张三和名为李四的分支</p>
+<p>2、在这两个分支中创建MathUtil.txt,张三的MathUtil.txt第一行写一个方法 add(int [] args)</p>
+<p>李四的MathUtil.txt第一行写一个方法 add(int a int b)</p>
+<p>3、在主分支上合并两个分支（合并时会报错,即为冲突）</p>
+<p>4、选中冲突的文件(带黄色感叹号的文件都是冲突的文件,如果有多个需要逐一处理)</p>
+<p>5、右键–&gt; 编辑冲突</p>
+<p>6、处理完毕后，标记已解决</p>
+<p><img src="/../image/git/33.png"></p>
+<p><img src="/../image/git/34.png"></p>
+<p><img src="/../image/git/35.png"></p>
+<p><img src="/../image/git/36.png"></p>
+
+        <h2 id="标签创建"   >
+          <a href="#标签创建" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签创建" class="headerlink" title="标签创建"></a>标签创建</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 创建标签</p>
+<p><img src="/../image/git/37.png"></p>
+
+        <h2 id="标签切换"   >
+          <a href="#标签切换" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签切换" class="headerlink" title="标签切换"></a>标签切换</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 切换&#x2F;检出</p>
+<p><img src="/../image/git/38.png"></p>
+
+        <h2 id="标签删除"   >
+          <a href="#标签删除" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签删除" class="headerlink" title="标签删除"></a>标签删除</h2>
+      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
+<p><img src="/../image/git/39.png"></p>
+<p><img src="/../image/git/40.png"></p>
+
+        <h2 id="创建远程仓库"   >
+          <a href="#创建远程仓库" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h2>
+      <p>代码不能总是放在本地,因为总是放在本地,一旦电脑出现故障,数据将丢失，可以搭建一个单间的局域网服务器，共享本地仓库中的代码，除了自己搭建服务器,其实也可以使用一些免费的远程仓库，接下来在码云（<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.gitee.com)中创建远程仓库/" >www.gitee.com）中创建远程仓库</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><img src="/../image/git/41.png"></p>
+
+        <h2 id="把本地代码推送到远端"   >
+          <a href="#把本地代码推送到远端" class="heading-link"><i class="fas fa-link"></i></a><a href="#把本地代码推送到远端" class="headerlink" title="把本地代码推送到远端"></a>把本地代码推送到远端</h2>
+      <p>空白处右键–&gt;Git同步</p>
+<p><img src="/../image/git/42.png"></p>
+<p><img src="/../image/git/43.png"></p>
+<p><img src="/../image/git/44.png"></p>
+
+        <h2 id="从远程仓库克隆代码"   >
+          <a href="#从远程仓库克隆代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#从远程仓库克隆代码" class="headerlink" title="从远程仓库克隆代码"></a>从远程仓库克隆代码</h2>
+      <p>新建一个文件夹本地仓库02，进入然后进行如下操作</p>
+<p><img src="/../image/git/45.png"></p>
+<p><img src="/../image/git/46.png"></p>
+<p><img src="D:/nodejs/j_test/source/image/git/47.png"></p>
+
+        <h2 id="代码的修改与提交-查看历史"   >
+          <a href="#代码的修改与提交-查看历史" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码的修改与提交-查看历史" class="headerlink" title="代码的修改与提交,查看历史"></a>代码的修改与提交,查看历史</h2>
+      <p>1、此时修改代码就不能仅仅是提交到本地了,提交完毕应该推送到远端服务器</p>
+<p>2、此时如果别人从远端仓库下载最新的代码其实是可以看到代码修改记录的</p>
+<p>空白处右键–&gt;Git提交-&gt;“master”</p>
+<p><img src="/../image/git/48.png"></p>
+<p>选中文件–&gt;TortoiseGit–&gt;显示日志</p>
+<p><img src="/../image/git/49.png"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">John Doe</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2023/06/25/Git/">http://example.com/2023/06/25/Git/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/06/25/kafka-eagle/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">在kafka集群中部署Eagle运维监控</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2023/06/25/kafka-API%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span class="paginator-prev__text">kafka API使用方法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81git%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">
+          一、git下载与安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81git%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">
+          二、git工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">
+          git初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">
+          git添加文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%EF%BC%8C%E4%B8%8E%E5%86%8D%E6%AC%A1%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">
+          修改文件，与再次提交文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6-%E4%B8%8D%E6%8F%90%E4%BA%A4%E5%92%8C%E4%B8%8A%E4%B8%80%E4%B8%AA%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83%E5%B7%AE%E5%BC%82-diff"><span class="toc-number">2.4.</span> <span class="toc-text">
+          修改文件,不提交和上一个版本比较差异(diff)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95"><span class="toc-number">2.5.</span> <span class="toc-text">
+          查看提交历史记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E9%80%80%E8%87%B3%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="toc-number">2.6.</span> <span class="toc-text">
+          回退至历史版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%88%A0%E9%99%A4%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">2.7.</span> <span class="toc-text">
+          本地删除与恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%89%88%E6%9C%AC%E5%BA%93%E4%B8%AD%E5%88%A0%E9%99%A4"><span class="toc-number">2.8.</span> <span class="toc-text">
+          从版本库中删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%A0%E9%99%A4-%E4%BD%86%E6%98%AF%E4%B8%8D%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0"><span class="toc-number">2.9.</span> <span class="toc-text">
+          从版本库删除,但是不删除本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%BD%E7%95%A5%E6%8F%90%E4%BA%A4"><span class="toc-number">2.10.</span> <span class="toc-text">
+          忽略提交</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TortoiseGit-%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93-%E5%88%86%E6%94%AF"><span class="toc-number">3.</span> <span class="toc-text">
+          TortoiseGit 操作本地仓库(分支)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">3.1.</span> <span class="toc-text">
+          创建分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">3.2.</span> <span class="toc-text">
+          查看分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">3.3.</span> <span class="toc-text">
+          切换分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%9A%84%E5%90%88%E5%B9%B6"><span class="toc-number">3.4.</span> <span class="toc-text">
+          分支的合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-number">3.5.</span> <span class="toc-text">
+          删除分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86"><span class="toc-number">3.6.</span> <span class="toc-text">
+          冲突处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E5%88%9B%E5%BB%BA"><span class="toc-number">3.7.</span> <span class="toc-text">
+          标签创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E5%88%87%E6%8D%A2"><span class="toc-number">3.8.</span> <span class="toc-text">
+          标签切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E5%88%A0%E9%99%A4"><span class="toc-number">3.9.</span> <span class="toc-text">
+          标签删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.10.</span> <span class="toc-text">
+          创建远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8A%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%AB%AF"><span class="toc-number">3.11.</span> <span class="toc-text">
+          把本地代码推送到远端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%85%8B%E9%9A%86%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">
+          从远程仓库克隆代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%8E%E6%8F%90%E4%BA%A4-%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2"><span class="toc-number">3.13.</span> <span class="toc-text">
+          代码的修改与提交,查看历史</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>

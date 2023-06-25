@@ -28,7 +28,387 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(Yarn)/">Spark(Yarn)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Sqoop%E9%85%8D%E7%BD%AE/">Sqoop配置</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="sqoop安装"   >
+          <a href="#sqoop安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#sqoop安装" class="headerlink" title="sqoop安装"></a>sqoop安装</h1>
+      <p>安装sqoop的前提是已经具备java、mysql、hadoop和hive环境。</p>
+<p>1、将sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz拖到node2中&#x2F;export&#x2F;software路径下</p>
+<p>2、解压到&#x2F;export&#x2F;server路径下</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /export/software/</span><br><span class="line">tar -zxvf sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz -C /expoort/server</span><br></pre></td></tr></table></div></figure>
+
+<p>3、设置软链接</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /export/server/sqoop-1.4.6.bin__hadoop-2.0.4-alpha/ /export/server/sqoop</span><br></pre></td></tr></table></div></figure>
+
+<p>4、修改环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">#SQOOP_HOME</span><br><span class="line">export SQOOP_HOME=/export/server/sqoop</span><br><span class="line">export PATH=$PATH:$SQOOP_HOME/bin</span><br></pre></td></tr></table></div></figure>
+
+<p>5、修改配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd $SQOOP_HOME/conf</span><br><span class="line">mv sqoop-env-template.sh sqoop-env.sh（sqoop-env-template.sh改名为sqoop-env.sh）</span><br><span class="line">vi sqoop-env.sh</span><br><span class="line">export HADOOP_COMMON_HOME= /export/server/hadoop</span><br><span class="line">export HADOOP_MAPRED_HOME= /export/server/hadoop</span><br><span class="line">export HIVE_HOME= /export/server/hive</span><br></pre></td></tr></table></div></figure>
+
+<p>6、加入mysql的jdbc驱动包</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /export/server/hive/lib/mysql-connector-java-5.1.32.jar $SQOOP_HOME/lib/</span><br></pre></td></tr></table></div></figure>
+
+<p>7、验证启动sqoop</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 本命令会列出所有mysql的数据库。</span><br><span class="line">cd /export/server/sqoop</span><br><span class="line">bin/sqoop list-databases \</span><br><span class="line"> --connect jdbc:mysql://node1:3306/ \</span><br><span class="line"> --username root --password Hadoop</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="sqoop导入"   >
+          <a href="#sqoop导入" class="heading-link"><i class="fas fa-link"></i></a><a href="#sqoop导入" class="headerlink" title="sqoop导入"></a>sqoop导入</h1>
+      <p>“导入工具”导入单个表从RDBMS到HDFS。表中的每一行被视为HDFS的记录。所有记录都存储为文本文件的文本数据。</p>
+
+        <h2 id="sqoop测试表数据"   >
+          <a href="#sqoop测试表数据" class="heading-link"><i class="fas fa-link"></i></a><a href="#sqoop测试表数据" class="headerlink" title="sqoop测试表数据"></a>sqoop测试表数据</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在mysql中创建数据库userdb</span><br><span class="line">创建三张表: emp雇员表、emp_add雇员地址表、emp_conn雇员联系表</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/1.png"></p>
+
+        <h2 id="全量导入MySQL表数据到HDFS"   >
+          <a href="#全量导入MySQL表数据到HDFS" class="heading-link"><i class="fas fa-link"></i></a><a href="#全量导入MySQL表数据到HDFS" class="headerlink" title="全量导入MySQL表数据到HDFS"></a>全量导入MySQL表数据到HDFS</h2>
+      <p>该命令用于从MySQL数据库服务器中的emp表导入HDFS</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#example1-mysql-hdfs-start</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--delete-target-dir \</span><br><span class="line">--target-dir /sqoop/sqoopresult_test \</span><br><span class="line">--table emp --m 1</span><br></pre></td></tr></table></div></figure>
+
+<p>为了验证在HDFS导入的数据，使用以下命令查看导入的数据</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -cat /sqoop/sqoopresult_test/part-m-00000</span><br></pre></td></tr></table></div></figure>
+
+<p>在HDFS上默认用逗号,分隔emp表的数据和字段</p>
+<p><img src="/../image/sqoop/2.png"></p>
+<p>在web中查看</p>
+<p><img src="/../image/sqoop/3.png"></p>
+
+        <h2 id="在HDFS上用’-t’-分隔emp表的数据和字段"   >
+          <a href="#在HDFS上用’-t’-分隔emp表的数据和字段" class="heading-link"><i class="fas fa-link"></i></a><a href="#在HDFS上用’-t’-分隔emp表的数据和字段" class="headerlink" title="在HDFS上用’\t’,分隔emp表的数据和字段"></a>在HDFS上用’\t’,分隔emp表的数据和字段</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#example2-mysql-hdfs-terminated</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--target-dir /sqoop/sqoopresult_test2 \</span><br><span class="line">--fields-terminated-by &#x27;\t&#x27; \</span><br><span class="line">--table emp --m 1</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/4.png"></p>
+
+        <h2 id="使用–m-指定并行度"   >
+          <a href="#使用–m-指定并行度" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用–m-指定并行度" class="headerlink" title="使用–m 指定并行度"></a>使用–m 指定并行度</h2>
+      <p>如果表的数据比较大可以并行启动多个maptask执行导入操作，使用–m 指定并行度</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#example3-mysql-hdfs-split</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--target-dir /sqoop/sqoopresult_test3 \</span><br><span class="line">--fields-terminated-by &#x27;\t&#x27; \</span><br><span class="line">--split-by id \</span><br><span class="line">--table emp --m 2</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/6.png"></p>
+<p><img src="/../image/sqoop/7.png"></p>
+
+        <h2 id="全量导入MySQL表数据到HIVE"   >
+          <a href="#全量导入MySQL表数据到HIVE" class="heading-link"><i class="fas fa-link"></i></a><a href="#全量导入MySQL表数据到HIVE" class="headerlink" title="全量导入MySQL表数据到HIVE"></a>全量导入MySQL表数据到HIVE</h2>
+      
+        <h3 id="方式一：先复制表结构到hive中再导入数据"   >
+          <a href="#方式一：先复制表结构到hive中再导入数据" class="heading-link"><i class="fas fa-link"></i></a><a href="#方式一：先复制表结构到hive中再导入数据" class="headerlink" title="方式一：先复制表结构到hive中再导入数据"></a>方式一：先复制表结构到hive中再导入数据</h3>
+      <p>在hive中新建数据库sqoop_test用于测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#创建名为sqoop_test的数据库</span><br><span class="line">create database if not exists sqoop_test comment &quot;this is sqoop db&quot;;</span><br><span class="line">#切换到该数据库</span><br><span class="line">use sqoop_test;</span><br><span class="line">#查看该数据库中的表</span><br><span class="line">show tables;</span><br><span class="line">#查看该数据库中的表结构</span><br><span class="line">desc formatted emp_add_sp;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/8.png"></p>
+<p>将关系型数据的表结构复制到hive中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example4-1-mysql-hive-structure</span><br><span class="line">bin/sqoop create-hive-table \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--table emp_add \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--hive-table sqoop_test.emp_add_sp</span><br></pre></td></tr></table></div></figure>
+
+<p>从关系数据库导入文件到hive中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#example4-2-mysql-hive-data</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table emp_add \</span><br><span class="line">--hive-table sqoop_test.emp_add_sp \</span><br><span class="line">--hive-import \</span><br><span class="line">--m 1</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/9.png"></p>
+
+        <h3 id="方式二：直接复制表结构数据到hive中"   >
+          <a href="#方式二：直接复制表结构数据到hive中" class="heading-link"><i class="fas fa-link"></i></a><a href="#方式二：直接复制表结构数据到hive中" class="headerlink" title="方式二：直接复制表结构数据到hive中"></a>方式二：直接复制表结构数据到hive中</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#example5-mysql-hive</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table emp_conn \</span><br><span class="line">--hive-import \</span><br><span class="line">--m 1 \</span><br><span class="line">--hive-database sqoop_test;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/10.png"></p>
+
+        <h2 id="导入表数据子集-where过滤"   >
+          <a href="#导入表数据子集-where过滤" class="heading-link"><i class="fas fa-link"></i></a><a href="#导入表数据子集-where过滤" class="headerlink" title="导入表数据子集(where过滤)"></a>导入表数据子集(where过滤)</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#example6-mysql-hdfs-where</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--where &quot;city =&#x27;sec-bad&#x27;&quot; \</span><br><span class="line">--target-dir /sqoop/wherequery_test \</span><br><span class="line">--table emp_add --m 1</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/11.png"></p>
+
+        <h2 id="导入表数据子集-query查询"   >
+          <a href="#导入表数据子集-query查询" class="heading-link"><i class="fas fa-link"></i></a><a href="#导入表数据子集-query查询" class="headerlink" title="导入表数据子集(query查询)"></a>导入表数据子集(query查询)</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#example7-mysql-hdfs-query</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--target-dir /sqoop/wherequery_test1 \</span><br><span class="line">--query &#x27;select id,name,deg from emp WHERE  id&gt;1203 and $CONDITIONS&#x27; \</span><br><span class="line">--split-by id \</span><br><span class="line">--fields-terminated-by &#x27;\001&#x27; \</span><br><span class="line">--m 2</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/12.png"></p>
+<p><img src="/../image/sqoop/13.png"></p>
+
+        <h2 id="Append模式增量导入"   >
+          <a href="#Append模式增量导入" class="heading-link"><i class="fas fa-link"></i></a><a href="#Append模式增量导入" class="headerlink" title="Append模式增量导入"></a>Append模式增量导入</h2>
+      <p>执行以下指令先将我们之前的数据导入</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example8-1-mysql-hdfs-append</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--target-dir /sqoop/appendresult_test \</span><br><span class="line">--table emp --m 1</span><br></pre></td></tr></table></div></figure>
+
+<p>使用hdfs dfs -cat查看生成的数据文件，发现数据已经导入到hdfs中</p>
+<p><img src="/../image/sqoop/14.png"></p>
+<p>在mysql的emp表中插入2条数据:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into `userdb`.`emp` (`id`, `name`, `deg`, `salary`, `dept`) values (&#x27;1208&#x27;, &#x27;allenn&#x27;, &#x27;admin&#x27;, &#x27;30000&#x27;, &#x27;tp&#x27;);</span><br><span class="line">insert into `userdb`.`emp` (`id`, `name`, `deg`, `salary`, `dept`) values (&#x27;1209&#x27;, &#x27;woonn&#x27;, &#x27;admin&#x27;, &#x27;40000&#x27;, &#x27;tp&#x27;);</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/15.png"></p>
+<p>执行如下的指令，实现增量的导入:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#example8-2-mysql-hdfs-append</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table emp --m 1 \</span><br><span class="line">--target-dir /sqoop/appendresult_test \</span><br><span class="line">--incremental append \</span><br><span class="line">--check-column id \</span><br><span class="line">--last-value 1205</span><br></pre></td></tr></table></div></figure>
+
+<p>最后验证导入数据目录 可以发现多了一个文件 里面就是增量数据</p>
+<p><img src="/../image/sqoop/16.png"></p>
+
+        <h2 id="Lastmodified模式增量导入"   >
+          <a href="#Lastmodified模式增量导入" class="heading-link"><i class="fas fa-link"></i></a><a href="#Lastmodified模式增量导入" class="headerlink" title="Lastmodified模式增量导入"></a>Lastmodified模式增量导入</h2>
+      <p>首先创建一个customer表，指定一个时间戳字段：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table customertest01(id int,name varchar(20),last_mod timestamp default current_timestamp on update current_timestamp);</span><br></pre></td></tr></table></div></figure>
+
+<p>此处的时间戳设置为在数据的产生和更新时都会发生改变</p>
+<p><img src="/../image/sqoop/17.png"></p>
+<p>插入如下记录:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert into customertest01(id,name) values(1,&#x27;neil&#x27;);</span><br><span class="line">insert into customertest01(id,name) values(2,&#x27;jack&#x27;);</span><br><span class="line">insert into customertest01(id,name) values(3,&#x27;martin&#x27;);</span><br><span class="line">insert into customertest01(id,name) values(4,&#x27;tony&#x27;);</span><br><span class="line">insert into customertest01(id,name) values(5,&#x27;eric&#x27;);</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/18.png"></p>
+<p>此时执行sqoop指令将数据导入hdfs:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example9-1-mysql-hdfs-Lastmodified</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--target-dir /sqoop/lastmodifiedresult_test \</span><br><span class="line">--table customertest01 --m 1</span><br></pre></td></tr></table></div></figure>
+
+<p>查看此时导入的结果数据：</p>
+<p><img src="/../image/sqoop/19.png"></p>
+<p>再次插入一条数据进入customertest表</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into customertest01(id,name) values(6,&#x27;james&#x27;)</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/20.png"></p>
+
+        <h2 id="使用incremental的方式进行增量的导入"   >
+          <a href="#使用incremental的方式进行增量的导入" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用incremental的方式进行增量的导入" class="headerlink" title="使用incremental的方式进行增量的导入:"></a>使用incremental的方式进行增量的导入:</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table customertest01 \</span><br><span class="line">--target-dir /sqoop/lastmodifiedresult_test \</span><br><span class="line">--check-column last_mod \</span><br><span class="line">--incremental lastmodified \</span><br><span class="line">--last-value &quot;2023-06-03 18:42:06&quot; \</span><br><span class="line">--m 1 \</span><br><span class="line">--append</span><br></pre></td></tr></table></div></figure>
+
+<p>查看此时导入的结果数据:</p>
+<p><img src="/../image/sqoop/21.png"></p>
+
+        <h2 id="Lastmodified模式-merge-key-合并-模式添加"   >
+          <a href="#Lastmodified模式-merge-key-合并-模式添加" class="heading-link"><i class="fas fa-link"></i></a><a href="#Lastmodified模式-merge-key-合并-模式添加" class="headerlink" title="Lastmodified模式:merge-key(合并)模式添加"></a>Lastmodified模式:merge-key(合并)模式添加</h2>
+      <p>1、去更新 customertest01表中id为1的name字段</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update customertest01 set name = &#x27;Neil&#x27; where id = 1;</span><br></pre></td></tr></table></div></figure>
+
+<p>更新之后，这条数据的时间戳会更新为更新数据时的系统时间</p>
+<p>2、执行如下指令，把id字段作为merge-key:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#example10-mysql-hdfs-merge-key</span><br><span class="line">bin/sqoop import \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table customertest01 \</span><br><span class="line">--target-dir /sqoop/lastmodifiedresult_test \</span><br><span class="line">--check-column last_mod \</span><br><span class="line">--incremental lastmodified \</span><br><span class="line">--last-value &quot;2013-06-3 18:42:06&quot; \</span><br><span class="line">--m 1 \</span><br><span class="line">--merge-key id</span><br></pre></td></tr></table></div></figure>
+
+<p>由于merge-key这种模式是进行了一次完整的mapreduce操作，因此最终我们在lastmodifiedresult_test文件夹下可以看到生成的为part-r-00000这样的文件，会发现id&#x3D;1的name已经得到修改，同时新增了id&#x3D;6的数据。</p>
+<p><img src="/../image/sqoop/22.png"></p>
+
+        <h1 id="sqoop导出"   >
+          <a href="#sqoop导出" class="heading-link"><i class="fas fa-link"></i></a><a href="#sqoop导出" class="headerlink" title="sqoop导出"></a>sqoop导出</h1>
+      <p>将数据从Hadoop生态体系导出到RDBMS数据库导出前，目标表必须存在于目标数据库中。</p>
+
+        <h2 id="默认模式导出HDFS数据到mysql"   >
+          <a href="#默认模式导出HDFS数据到mysql" class="heading-link"><i class="fas fa-link"></i></a><a href="#默认模式导出HDFS数据到mysql" class="headerlink" title="默认模式导出HDFS数据到mysql"></a>默认模式导出HDFS数据到mysql</h2>
+      <p>1、准备HDFS数据</p>
+<p>在HDFS文件系统中“&#x2F;emp&#x2F;”目录的下创建一个文件emp_data.txt：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/data/sqoop-data/emp/</span><br><span class="line">vim emp_data.txt</span><br><span class="line">1201,gopal,manager,50000,TP</span><br><span class="line">1202,manisha,preader,50000,TP</span><br><span class="line">1203,kalil,php dev,30000,AC</span><br><span class="line">1204,prasanth,php dev,30000,AC</span><br><span class="line">1205,kranthi,admin,20000,TP</span><br><span class="line">1206,satishp,grpdes,20000,GR</span><br><span class="line">#上传至hdfs</span><br><span class="line">hadoop fs -mkdir /sqoop/emp_data</span><br><span class="line">hadoop fs -put emp_data.txt /sqoop/emp_data</span><br></pre></td></tr></table></div></figure>
+
+<p>2、手动创建mysql中的目标表</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use userdb;</span><br><span class="line"></span><br><span class="line">mysql&gt; create table employee ( </span><br><span class="line"></span><br><span class="line">  id int not null primary key, </span><br><span class="line"></span><br><span class="line">  name varchar(20), </span><br><span class="line"></span><br><span class="line">  deg varchar(20),</span><br><span class="line"></span><br><span class="line">  salary int,</span><br><span class="line"></span><br><span class="line">  dept varchar(10));</span><br></pre></td></tr></table></div></figure>
+
+<p>3、执行导出命令</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#example10-hdfs-mysql-export</span><br><span class="line"></span><br><span class="line">bin/sqoop export \</span><br><span class="line"></span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line"></span><br><span class="line">--username root \</span><br><span class="line"></span><br><span class="line">--password hadoop \</span><br><span class="line"></span><br><span class="line">--table employee \</span><br><span class="line"></span><br><span class="line">--columns id,name,deg,salary,dept \</span><br><span class="line"></span><br><span class="line">--export-dir /sqoop/emp_data/</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/5.png"></p>
+
+        <h2 id="更新导出（updateonly模式）"   >
+          <a href="#更新导出（updateonly模式）" class="heading-link"><i class="fas fa-link"></i></a><a href="#更新导出（updateonly模式）" class="headerlink" title="更新导出（updateonly模式）"></a>更新导出（updateonly模式）</h2>
+      <p>1、准备HDFS数据</p>
+<p>在HDFS文件系统中&#x2F;sqoop&#x2F;updateonly_1&#x2F;目录的下创建一个文件updateonly_1.txt：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/data/sqoop-data/updateonly_1</span><br><span class="line">vim updateonly_1.txt</span><br><span class="line">1201,gopal,manager,50000</span><br><span class="line">1202,manisha,preader,50000</span><br><span class="line">1203,kalil,php dev,30000</span><br><span class="line">\#上传至hdfs</span><br><span class="line">hadoop fs -mkdir /sqoop/emp_data</span><br><span class="line">hadoop fs -put updateonly_1.txt /sqoop/updateonly_1</span><br></pre></td></tr></table></div></figure>
+
+<p>2、手动创建mysql中的目标表</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE userdb;</span><br><span class="line">mysql&gt; CREATE TABLE updateonly ( </span><br><span class="line">  id INT NOT NULL PRIMARY KEY, </span><br><span class="line">  name VARCHAR(20), </span><br><span class="line">  deg VARCHAR(20),</span><br><span class="line">  salary INT);</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/sqoop/23.png"></p>
+<p>3、执行全部导出操作</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example11-1-hdfs-mysql-export-updateonly</span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table updateonly \</span><br><span class="line">--export-dir /sqoop/updateonly_1/</span><br></pre></td></tr></table></div></figure>
+
+<p>4、查看此时mysql中的数据</p>
+<p>全量导出</p>
+<p><img src="/../image/sqoop/24.png"></p>
+<p>5、新增一个文件</p>
+<p>新增一个文件updateonly_2.txt：修改了前三条数据并且新增了一条记录</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1201,gopal,manager,1212</span><br><span class="line">1202,manisha,preader,1313</span><br><span class="line">1203,kalil,php dev,1414</span><br><span class="line">1204,allen,java,1515</span><br><span class="line">hadoop fs -mkdir /sqoop/updateonly_2</span><br><span class="line">hadoop fs -put updateonly_2.txt /sqoop/updateonly_2</span><br></pre></td></tr></table></div></figure>
+
+<p>6、执行更新导出</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#example11-2-hdfs-mysql-export-updateonly</span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table updateonly \</span><br><span class="line">--export-dir /sqoop/updateonly_2 \</span><br><span class="line">--update-key id \</span><br><span class="line">--update-mode updateonly</span><br></pre></td></tr></table></div></figure>
+
+<p>7、查看最终结果</p>
+<p><img src="/../image/sqoop/24.png"></p>
+
+        <h2 id="更新导出（allowinsert模式）"   >
+          <a href="#更新导出（allowinsert模式）" class="heading-link"><i class="fas fa-link"></i></a><a href="#更新导出（allowinsert模式）" class="headerlink" title="更新导出（allowinsert模式）"></a>更新导出（allowinsert模式）</h2>
+      <p>1、在HDFS &#x2F;sqoop&#x2F;allowinsert_1&#x2F;目录的下创建一个文件allowinsert_1.txt：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/data/sqoop-data/allowinsert_1/</span><br><span class="line">cd /export/data/sqoop-data/allowinsert_1/</span><br><span class="line">vim allowinsert_1.txt</span><br><span class="line">1201,gopal,manager,50000</span><br><span class="line">1202,manisha,preader,50000</span><br><span class="line">1203,kalil,php dev,30000</span><br><span class="line">#上传至hdfs</span><br><span class="line">hadoop fs -mkdir /sqoop/allowinsert_1</span><br><span class="line">hadoop fs -put allowinsert_1.txt /sqoop/allowinsert_1</span><br></pre></td></tr></table></div></figure>
+
+<p>2、手动创建mysql中的目标表</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE userdb;</span><br><span class="line">mysql&gt; CREATE TABLE allowinsert ( </span><br><span class="line">   id INT NOT NULL PRIMARY KEY, </span><br><span class="line">   name VARCHAR(20), </span><br><span class="line">   deg VARCHAR(20),</span><br><span class="line">   salary INT);</span><br></pre></td></tr></table></div></figure>
+
+<p>3、先执行全部导出操作</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example12-1-hdfs-mysql-export-allowinsert</span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root \</span><br><span class="line">--password hadoop \</span><br><span class="line">--table allowinsert \</span><br><span class="line">--export-dir /sqoop/allowinsert_1/</span><br></pre></td></tr></table></div></figure>
+
+<p>4、查看此时mysql中的数据</p>
+<p><img src="/../image/sqoop/26.png"></p>
+<p>5、新增文件</p>
+<p>创建文件allowinsert_2.txt。修改前三条数据并且新增了一条记录。上传至 &#x2F;sqoop&#x2F;allowinsert_2&#x2F;目录下：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/data/sqoop-data/allowinsert_2/</span><br><span class="line">cd /export/data/sqoop-data/allowinsert_2/</span><br><span class="line">vim allowinsert_2.txt</span><br><span class="line">1201,gopal,manager,1212</span><br><span class="line">1202,manisha,preader,1313</span><br><span class="line">1203,kalil,php dev,1414</span><br><span class="line">1204,allen,java,1515</span><br><span class="line">#上传至hdfs</span><br><span class="line">hadoop fs -mkdir /sqoop/allowinsert_2</span><br><span class="line">hadoop fs -put allowinsert_2.txt /sqoop/allowinsert_2</span><br></pre></td></tr></table></div></figure>
+
+<p>6、执行更新导出</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#example12-2-hdfs-mysql-export-allowinsert</span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://node1:3306/userdb \</span><br><span class="line">--username root --password hadoop \</span><br><span class="line">--table allowinsert \</span><br><span class="line">--export-dir /sqoop/allowinsert_2/ \</span><br><span class="line">--update-key id \</span><br><span class="line">--update-mode allowinsert</span><br></pre></td></tr></table></div></figure>
+
+<p>7、查看最终结果</p>
+<p><img src="/../image/sqoop/27.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/zookeeper%E9%83%A8%E7%BD%B2/">zookeeper部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="准备工作"   >
+          <a href="#准备工作" class="heading-link"><i class="fas fa-link"></i></a><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1>
+      <p>安装前需要安装好jdk</p>
+<p>检测集群时间是否同步</p>
+<p>检测防火墙是否关闭</p>
+<p>检测主机 ip映射有没有配置</p>
+<p><img src="/../image/zookeeper/1.png"></p>
+
+        <h1 id="解压以及设置软连接"   >
+          <a href="#解压以及设置软连接" class="heading-link"><i class="fas fa-link"></i></a><a href="#解压以及设置软连接" class="headerlink" title="解压以及设置软连接"></a>解压以及设置软连接</h1>
+      <p>在node1主机上，解压zookeeper的压缩包到&#x2F;export&#x2F;server路径下去，然后准备进行安装</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /export/software</span><br><span class="line">tar -zxvf zookeeper.tar.gz -C /export/server/</span><br><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper/ zookeeper</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/2.png"></p>
+
+        <h1 id="环境变量"   >
+          <a href="#环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1>
+      <p>修改环境变量（注意：3台zookeeper都需要修改）</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">export ZOOKEEPER_HOME=/export/server/zookeeper</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="配置文件"   >
+          <a href="#配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1>
+      <p>修改Zookeeper配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/zookeeper/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line">mkdir -p /export/data/zookeeper/zkdatas/</span><br><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="添加myid配置"   >
+          <a href="#添加myid配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#添加myid配置" class="headerlink" title="添加myid配置"></a>添加myid配置</h1>
+      <p>在node1主机的&#x2F;export&#x2F;data&#x2F;zookeeper&#x2F;zkdatas这个路径下创建一个文件，文件名为myid ,文件内容为1</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /export/data/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/3.png"></p>
+
+        <h1 id="安装包分发并修改myid的值"   >
+          <a href="#安装包分发并修改myid的值" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装包分发并修改myid的值" class="headerlink" title="安装包分发并修改myid的值"></a>安装包分发并修改myid的值</h1>
+      <p>在node1主机上，将安装包分发到其他机器</p>
+<p>第一台机器上面执行以下两个命令</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">scp -r /export/server/zookeeper-3.4.6/ root@node2:/export/server/</span><br><span class="line">scp -r /export/server/zookeeper-3.4.6/ root@node2:/export/server/</span><br></pre></td></tr></table></div></figure>
+
+<p>第二台机器上建立软连接, 并修改myid的值为2</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper-3.4.6/ zookeeper</span><br><span class="line">echo 2 &gt; /export/data/zookeeper/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+<p>第三台机器上建立软连接, 并修改myid的值为3</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">ln -s zookeeper-3.4.6/ zookeeper</span><br><span class="line">echo 3 &gt; /export/data/zookeeper/zkdatas/myid</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="三台机器启动zookeeper服务"   >
+          <a href="#三台机器启动zookeeper服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#三台机器启动zookeeper服务" class="headerlink" title="三台机器启动zookeeper服务"></a>三台机器启动zookeeper服务</h1>
+      <p>三台机器分别启动zookeeper服务</p>
+<p>这个命令三台机器都要执行</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/export/server/zookeeper/bin/zkServer.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/4.png"></p>
+<p><img src="/../image/zookeeper/5.png"></p>
+<p><img src="/../image/zookeeper/6.png"></p>
+<p>三台主机分别查看启动状态</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/export/server/zookeeper/bin/zkServer.sh status</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/7.png"></p>
+<p><img src="/../image/zookeeper/8.png"></p>
+<p><img src="/../image/zookeeper/9.png"></p>
+
+        <h1 id="启动（每台机器）"   >
+          <a href="#启动（每台机器）" class="heading-link"><i class="fas fa-link"></i></a><a href="#启动（每台机器）" class="headerlink" title="启动（每台机器）"></a>启动（每台机器）</h1>
+      <p>zkServer.sh start</p>
+<p>编写一个脚本来批量启动所有机器</p>
+<p>1.创建&#x2F;export&#x2F;server&#x2F;start&#x2F;zk_start目录</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /export/shell</span><br></pre></td></tr></table></div></figure>
+
+<p>2.编辑创建zkall.sh</p>
+<p><img src="/../image/zookeeper/10.png"></p>
+<p>3.写shell脚本</p>
+<p><img src="/../image/zookeeper/11.png"></p>
+<p>4.配置zk脚本环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#ZOOKEEPER_SHELL_HOME</span><br><span class="line">export ZKS_HOME=/export/shell/</span><br><span class="line">export PATH=$PATH:$ZKS_HOME</span><br></pre></td></tr></table></div></figure>
+
+<p>5.zookeeper的环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZK_HOME=/export/server/zookeeper</span><br><span class="line">export PATH=$&#123;ZK_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></div></figure>
+
+<p>6.让环境变量生效</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+<p>7.启动测试</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /export/shell/zkall.sh</span><br><span class="line">zkall.sh start</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/zookeeper/12.png"></p>
+<p>启动成功，测试结束</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/spark%E5%AE%9E%E8%AE%AD/">saprk</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="1、安装nodejs"   >
+          <a href="#1、安装nodejs" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、安装nodejs" class="headerlink" title="1、安装nodejs"></a>1、安装nodejs</h1>
+      <p><img src="/..%5Cimage%5Cgit%5C1.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Spark(Local)/">Spark(Local)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="1、环境变量"   >
+          <a href="#1、环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、环境变量" class="headerlink" title="1、环境变量"></a>1、环境变量</h1>
+      <p>配置Spark由如下5个环境变量需要设置</p>
+<p>- SPARK_HOME: 表示Spark安装路径在哪里 </p>
+<p>- PYSPARK_PYTHON: 表示Spark想运行Python程序, 那么去哪里找python执行器 </p>
+<p>- JAVA_HOME: 告知Spark Java在哪里 </p>
+<p>- HADOOP_CONF_DIR: 告知Spark Hadoop的配置文件在哪里 </p>
+<p>- HADOOP_HOME: 告知Spark Hadoop安装在哪里</p>
+<p>这5个环境变量 都需要配置在: <code>/etc/profile</code>中</p>
+<p><img src="/../image/2.png"></p>
+
+        <h1 id="2、安装anaconda"   >
+          <a href="#2、安装anaconda" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、安装anaconda" class="headerlink" title="2、安装anaconda"></a>2、安装anaconda</h1>
+      
+        <h2 id="（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下"   >
+          <a href="#（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下" class="heading-link"><i class="fas fa-link"></i></a><a href="#（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下" class="headerlink" title="（1）把资源包Anaconda3-2021.05-Linux-x86_64.sh文件放到文件夹下"></a>（1）把资源包Anaconda3-2021.05-Linux-x86_64.sh文件放到文件夹下</h2>
+      <p><img src="/../image/3.png"></p>
+
+        <h2 id="（2）运行Anaconda3-2021-05-Linux-x86-64-sh"   >
+          <a href="#（2）运行Anaconda3-2021-05-Linux-x86-64-sh" class="heading-link"><i class="fas fa-link"></i></a><a href="#（2）运行Anaconda3-2021-05-Linux-x86-64-sh" class="headerlink" title="（2）运行Anaconda3-2021.05-Linux-x86_64.sh"></a>（2）运行Anaconda3-2021.05-Linux-x86_64.sh</h2>
+      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/4.png"></p>
+<p><img src="/../image/5.png"></p>
+
+        <h2 id="3-出现（base）即为安装成功"   >
+          <a href="#3-出现（base）即为安装成功" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-出现（base）即为安装成功" class="headerlink" title="(3)出现（base）即为安装成功"></a>(3)出现（base）即为安装成功</h2>
+      <p><img src="/../image/6.png" alt="6"></p>
+
+        <h1 id="3、创建虚拟环境"   >
+          <a href="#3、创建虚拟环境" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、创建虚拟环境" class="headerlink" title="3、创建虚拟环境"></a>3、创建虚拟环境</h1>
+      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pyspark python=3.8</span><br><span class="line">conda activate pyspark</span><br><span class="line">pipinstallpyhive pyspark jieba -i https://pypi.tuna.tsinghua.edu.cn</span><br><span class="line">/simple</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="4、修改环境变量配置Spark由如下5个环境变量需要设置"   >
+          <a href="#4、修改环境变量配置Spark由如下5个环境变量需要设置" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、修改环境变量配置Spark由如下5个环境变量需要设置" class="headerlink" title="4、修改环境变量配置Spark由如下5个环境变量需要设置"></a>4、修改环境变量配置Spark由如下5个环境变量需要设置</h1>
+      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SPARK_HOME: 表示Spark安装路径在哪里 </span><br><span class="line"></span><br><span class="line">PYSPARK_PYTHON: 表示Spark想运行Python程序, 那么去哪里找python执行器</span><br><span class="line"></span><br><span class="line">JAVA_HOME: 告知Spark Java在哪里</span><br><span class="line"></span><br><span class="line">HADOOP_CONF_DIR: 告知Spark Hadoop的配置文件在哪里</span><br><span class="line"></span><br><span class="line">HADOOP_HOME: 告知Spark  Hadoop安装在哪里</span><br></pre></td></tr></table></div></figure>
+
+<p>这5个环境变量 都需要配置在:&#x2F;etc&#x2F;profile中<img src="/../image/7.png"></p>
+<p>PYSPARK_PYTHON和 JAVA_HOME 需要同样配置在:</p>
+<p>&#x2F;root&#x2F;.bashrc中</p>
+<p><img src="/../image/8.png"></p>
+
+        <h1 id="5、上传Spark安装包"   >
+          <a href="#5、上传Spark安装包" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、上传Spark安装包" class="headerlink" title="5、上传Spark安装包"></a>5、上传Spark安装包</h1>
+      <p>资料中提供了: spark-3.2.0-bin-hadoop3.2.tgz</p>
+<p>上传这个文件到Linux服务器中</p>
+<p><img src="/../image/9.png"></p>
+
+        <h1 id="6、解压"   >
+          <a href="#6、解压" class="heading-link"><i class="fas fa-link"></i></a><a href="#6、解压" class="headerlink" title="6、解压"></a>6、解压</h1>
+      <p>将其解压, 课程中将其解压(安装)到: &#x2F;export&#x2F;server内.</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf spark-3.2.0-bin-hadoop3.2.tgz -C /export/server/</span><br></pre></td></tr></table></div></figure>
+
+<p>由于spark目录名称很长, 给其一个软链接:</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s/export/server/spark-3.2.0-bin-hadoop3.2 /export/server/spark</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/10.png"></p>
+
+        <h1 id="7、测试"   >
+          <a href="#7、测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#7、测试" class="headerlink" title="7、测试"></a>7、测试</h1>
+      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/pyspark</span><br></pre></td></tr></table></div></figure>
+
+<p>bin&#x2F;pyspark 程序, 可以提供一个交互式的 Python解释器环境, 在这里面可以写普通python代码, 以及spark代码</p>
+<p><img src="/../image/11.png"></p>
+<p><img src="/../image/12.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Spark(Yarn)/">Spark(Yarn)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="1、client模式测试"   >
           <a href="#1、client模式测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、client模式测试" class="headerlink" title="1、client模式测试"></a>1、client模式测试</h1>
       
@@ -47,7 +427,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
       <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;SPARK_HOME&#125;/bin/spark-submit --master yarn --deploy-mode cluster --driver-memory 512m --executor-memory 512m --num-executors 1 --total-executor-cores 2 --conf <span class="string">&quot;spark.pyspark.driver.python=/root/anaconda3/bin/python3&quot;</span> --conf <span class="string">&quot;spark.pyspark.python=/root/anaconda3/bin/python3&quot;</span> <span class="variable">$&#123;SPARK_HOME&#125;</span>/examples/src/main/python/pi.py 10</span></span><br></pre></td></tr></table></div></figure>
 
 <p><img src="/../image/54.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(pyspark)/">Spark(Pyspark)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Spark(pyspark)/">Spark(Pyspark)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="1、Pyspark环境配置安装"   >
           <a href="#1、Pyspark环境配置安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、Pyspark环境配置安装" class="headerlink" title="1、Pyspark环境配置安装"></a>1、Pyspark环境配置安装</h1>
       <p>PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。</p>
@@ -84,139 +464,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
 <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">创建虚拟环境 pyspark, 基于Python 3.8</span><br><span class="line">conda create -n pyspark python=3.8</span><br><span class="line">切换到虚拟环境内</span><br><span class="line">conda activate pyspark</span><br><span class="line">在虚拟环境内安装包</span><br><span class="line">pip install pyhive pyspark jieba -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></div></figure>
 
 <p><img src="/../image/pyspark/7.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Docker%E9%83%A8%E7%BD%B2/">Docker部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="安装docker"   >
-          <a href="#安装docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1>
-      
-        <h2 id="1、虚拟机联网，安装yum工具"   >
-          <a href="#1、虚拟机联网，安装yum工具" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、虚拟机联网，安装yum工具" class="headerlink" title="1、虚拟机联网，安装yum工具"></a>1、虚拟机联网，安装yum工具</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils \</span><br><span class="line">           device-mapper-persistent-data \</span><br><span class="line">           lvm2 --skip-broken</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/1.png"></p>
-<p><img src="/../image/docker/2.png"></p>
-
-        <h2 id="2、配置网卡转发"   >
-          <a href="#2、配置网卡转发" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、配置网卡转发" class="headerlink" title="2、配置网卡转发"></a>2、配置网卡转发</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.docker必须安装在centos7平台，内核版本不低于3.10在centos平台运行docker可能会遇见些告警信息，修改内核配置参数，打开内核转发功能</span></span><br><span class="line"><span class="comment">#写入</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /etc/sysctl.d/docker.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">net.ipv4.conf.default.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.conf.all.rp_filter = 0</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward=1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"><span class="comment">#2.重新加载内核参数</span></span><br><span class="line">modprobe br_netfilter</span><br><span class="line">sysctl -p /etc/sysctl.d/docker.conf</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/3.png"></p>
-
-        <h2 id="3、利用yum进行docker安装"   >
-          <a href="#3、利用yum进行docker安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、利用yum进行docker安装" class="headerlink" title="3、利用yum进行docker安装"></a>3、利用yum进行docker安装</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提前配置好yum仓库</span></span><br><span class="line"><span class="comment"># 1.阿里云自带仓库 2.阿里云提供的docker专属repo仓库</span></span><br><span class="line"></span><br><span class="line">curl -o /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">curl -o /etc/yum.repos.d/Centos-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/4.png"></p>
-<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#更新yum缓存</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/5.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以直接yum安装docker了</span></span><br><span class="line"><span class="comment">## 查看源中可用版本</span></span><br><span class="line">yum list docker-ce --showduplicates | <span class="built_in">sort</span> -r</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/6.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## yum安装</span></span><br><span class="line">yum install docker-ce -y</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/7.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/8.png"></p>
-
-        <h2 id="4、配置镜像加速器"   >
-          <a href="#4、配置镜像加速器" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、配置镜像加速器" class="headerlink" title="4、配置镜像加速器"></a>4、配置镜像加速器</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用于加速镜像文件下载,选用阿里云镜像站</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line"><span class="built_in">touch</span> /etc/docker/daemon.json</span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span> : [</span><br><span class="line"><span class="string">&quot;https://8xpk5wnt.mirror.aliyuncs.com&quot;</span></span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/9.png"></p>
-<p><img src="/../image/docker/10.png"></p>
-
-        <h2 id="5、启动docker"   >
-          <a href="#5、启动docker" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、启动docker" class="headerlink" title="5、启动docker"></a>5、启动docker</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动docker前，一定要关闭防火墙后！！</span></span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 禁止开机启动防火墙</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/11.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##通过命令启动docker：</span></span><br><span class="line"><span class="comment">#systemctl start docker  # 启动docker服务</span></span><br><span class="line"><span class="comment">#systemctl stop docker  # 停止docker服务</span></span><br><span class="line"><span class="comment">#systemctl restart docker  # 重启docker服务</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/12.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 查看docker信息</span></span><br><span class="line">docker info</span><br><span class="line">docker ps</span><br><span class="line">docker images</span><br><span class="line">docker version</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/13.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/14.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#再次查看镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/15.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/16.png"></p>
-
-        <h2 id="6、镜像原理"   >
-          <a href="#6、镜像原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#6、镜像原理" class="headerlink" title="6、镜像原理"></a>6、镜像原理</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release </span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/17.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看内核</span></span><br><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/18.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用docker获取不同的发行版镜像（例如centos：7.8.2003）</span></span><br><span class="line">docker pull centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/19.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#确认当前宿主机的发行版</span></span><br><span class="line"><span class="built_in">cat</span> /etc/redhat-release</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/20.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行centos:7.8.2003发行版本</span></span><br><span class="line"><span class="comment">#运行容器，且进入容器内部</span></span><br><span class="line"><span class="comment">#参数解释，-i 交互式命令操作 -t 开启一个终端 bash 进入容器后执行的命令</span></span><br><span class="line">docker run -it afb6fca791e0 bash</span><br><span class="line"><span class="comment">#退出容器空间</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/21.png"></p>
-
-        <h2 id="7、获取镜像"   >
-          <a href="#7、获取镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#7、获取镜像" class="headerlink" title="7、获取镜像"></a>7、获取镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker search 镜像名:tag </span></span><br><span class="line"><span class="comment">#tag就是具体的标签版本</span></span><br><span class="line">docker search centos</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/22.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker镜像的存储路径</span></span><br><span class="line">docker info |grep Root</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/23.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#具体位置</span></span><br><span class="line"><span class="built_in">ls</span> /var/lib/docker/image/overlay2/imagedb/content/sha256</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/24.png"></p>
-<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#使用不同的镜像，生成容器</span><br><span class="line"># -it 开启一个交互式的终端--rm 容器退出时删除该容器</span><br><span class="line">#再运行一个7.8centos</span><br><span class="line">docker run -it --rm centos bash</span><br></pre></td></tr></table></div></figure>
-
-
-        <h2 id="8、查看镜像"   >
-          <a href="#8、查看镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#8、查看镜像" class="headerlink" title="8、查看镜像"></a>8、查看镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看所有镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/25.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定tag查看</span></span><br><span class="line">docker images centos:7.8.2003</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/26.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只列出镜像id  </span></span><br><span class="line"><span class="comment">#-q –quiet</span></span><br><span class="line">docker images -q</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/27.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化显示镜像</span></span><br><span class="line"><span class="comment">#这是docker的模板语言，--format</span></span><br><span class="line">docker images --format <span class="string">&quot;&#123;&#123;.ID&#125;&#125;--&#123;&#123;.Repository&#125;&#125;&quot;</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/28.png"></p>
-
-        <h2 id="9、删除镜像"   >
-          <a href="#9、删除镜像" class="heading-link"><i class="fas fa-link"></i></a><a href="#9、删除镜像" class="headerlink" title="9、删除镜像"></a>9、删除镜像</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除容器记录：</span></span><br><span class="line">docker <span class="built_in">rm</span> 容器<span class="built_in">id</span></span><br><span class="line"><span class="comment">#指定id的前三位即可：</span></span><br><span class="line">docker rmi 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
-
-
-        <h2 id="10、镜像管理"   >
-          <a href="#10、镜像管理" class="heading-link"><i class="fas fa-link"></i></a><a href="#10、镜像管理" class="headerlink" title="10、镜像管理"></a>10、镜像管理</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#批量删除镜像：</span></span><br><span class="line">docker rmi <span class="string">&#x27;docker images -aq&#x27;</span></span><br><span class="line"><span class="comment">#批量删除容器：</span></span><br><span class="line">docker <span class="built_in">rm</span> <span class="string">&#x27;docker ps -aq&#x27;</span></span><br><span class="line"><span class="comment">#导出镜像：</span></span><br><span class="line">docker save -o nginx.tgz nginx:latest<span class="comment">#打包tar包</span></span><br><span class="line"><span class="comment">#导入镜像：</span></span><br><span class="line"><span class="comment">#先删除本地的nginx镜像：</span></span><br><span class="line">docker rmi centos:7.8.2003</span><br><span class="line">docker image load -i /export/software/centos1.8.2003.tgz<span class="comment">#重新加载nginx-tar包</span></span><br><span class="line"><span class="comment">#查看cocker服务的信息：</span></span><br><span class="line">docker info</span><br><span class="line"><span class="comment">#查看镜像详细信息：</span></span><br><span class="line">docker image inspact 镜像<span class="built_in">id</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/29.png"></p>
-
-        <h2 id="11、容器操作"   >
-          <a href="#11、容器操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#11、容器操作" class="headerlink" title="11、容器操作"></a>11、容器操作</h2>
-      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建并运行mn容器</span></span><br><span class="line">docker run --name mn -p 80:80 -d nginx</span><br><span class="line"><span class="comment">#运行刚刚创建的nginx容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mn bash</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/30.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入nginx的HTML所在目录 /usr/share/nginx/html</span></span><br><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/31.png"></p>
-<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改index.html的内容</span></span><br><span class="line">sed -i -e <span class="string">&#x27;s#Welcome to nginx#人工智能学院欢迎您#g&#x27;</span> -e <span class="string">&#x27;s#&lt;head&gt;#&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;#g&#x27;</span> index.html</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/docker/32.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark%20(Stand%20Alone)/">Spark(Stand Alone)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Spark%20(Stand%20Alone)/">Spark(Stand Alone)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="部署Spark-Stand-Alone环境"   >
           <a href="#部署Spark-Stand-Alone环境" class="heading-link"><i class="fas fa-link"></i></a><a href="#部署Spark-Stand-Alone环境" class="headerlink" title="部署Spark Stand Alone环境"></a>部署Spark Stand Alone环境</h1>
       <p>需要用到三台linux虚拟机构成，在此以node1、node2、node3为例</p>
@@ -350,320 +598,181 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></he
           <a href="#8-查看历史服务器web-ui" class="heading-link"><i class="fas fa-link"></i></a><a href="#8-查看历史服务器web-ui" class="headerlink" title="8.查看历史服务器web ui"></a>8.查看历史服务器web ui</h2>
       <p>打开浏览器</p>
 <p><img src="/../image/37.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(Local)/">Spark(Local)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="1、环境变量"   >
-          <a href="#1、环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、环境变量" class="headerlink" title="1、环境变量"></a>1、环境变量</h1>
-      <p>配置Spark由如下5个环境变量需要设置</p>
-<p>- SPARK_HOME: 表示Spark安装路径在哪里 </p>
-<p>- PYSPARK_PYTHON: 表示Spark想运行Python程序, 那么去哪里找python执行器 </p>
-<p>- JAVA_HOME: 告知Spark Java在哪里 </p>
-<p>- HADOOP_CONF_DIR: 告知Spark Hadoop的配置文件在哪里 </p>
-<p>- HADOOP_HOME: 告知Spark Hadoop安装在哪里</p>
-<p>这5个环境变量 都需要配置在: <code>/etc/profile</code>中</p>
-<p><img src="/../image/2.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Kafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">Kafka命令行操作</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Kafka 中提供了许多命令行工具（位于$KAFKA HOME&#x2F;bin 目录下）用于管理集群的变更。</p>
 
-        <h1 id="2、安装anaconda"   >
-          <a href="#2、安装anaconda" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、安装anaconda" class="headerlink" title="2、安装anaconda"></a>2、安装anaconda</h1>
+        <h1 id="创建topic"   >
+          <a href="#创建topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h1>
+      <p>创建一个topic（主题）。Kafka中所有的消息都是保存在主题中，要生产消息到Kafka，首先必须要有一个确定的主题。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#基本方式</span><br><span class="line">./kafka-topics.sh --create --topic tpc_1 --partitions 2 --replication-factor 2 --zookeeper node1:2181</span><br><span class="line"></span><br><span class="line">--replication-factor 副本数量</span><br><span class="line">--partitions 分区数量</span><br><span class="line">--topic topic 名称</span><br><span class="line"></span><br><span class="line">#手动指定副本的存储位置</span><br><span class="line">bin/kafka-topics.sh --create --topic tpc_1 --zookeeper node1:2181 --replica-assignment 0:1,1:2</span><br><span class="line">该方式下,命令会自动判断所要创建的 topic 的分区数及副本数</span><br><span class="line"></span><br><span class="line">#bootstrap方式</span><br><span class="line"># 创建名为test的主题</span><br><span class="line">bin/kafka-topics.sh --create --bootstrap-server node1:9092 --topic test</span><br><span class="line"># 查看目前Kafka中的主题</span><br><span class="line">bin/kafka-topics.sh --list --bootstrap-server node1:9092</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--replica-assignment 不能同时使用--partitions --replication-factor参数指定partition的AR列表，未指定AR列表则会根据负载均衡算法将partition的replica均衡的分布在Kafka集群中。</span><br><span class="line"></span><br><span class="line">--replica-assignment 1:3,2:1,3:2，</span><br><span class="line">#逗号区分不同的partition，</span><br><span class="line">#冒号区别相同partition中的replica，</span><br><span class="line">#partition-0的AR=[1,3]，partition-1的AR=[2,1]，partition-2的AR=[3,2]。</span><br><span class="line"></span><br><span class="line">Eg：testMcdull222AR列表计算出来时--replica-assignment 2:3,1:3,1:2 。数字指的是broker的ID号</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--replica-assignment 参数一般不由用户指定，由Kafka默认分配算法保证，有两个原则：</span><br><span class="line"></span><br><span class="line">（1）使Topic的所有Partition Replica能够均匀地分配至各个Kafka Broker（负载均衡）；</span><br><span class="line">（2）Partition 内的replica能够均匀地分配在不同Kafka Broker。</span><br><span class="line"></span><br><span class="line">#如果Partition的第一个Replica分配至某一个Kafka Broker，那么这个Partition的其它Replica则需要分配至其它的Kafka Brokers，即Partition Replica分配至不同的Broker；</span><br><span class="line"></span><br><span class="line">#分配原则</span><br><span class="line">1、从Broker随机位置开始按照轮询方式选择每个Partition的第一个replica</span><br><span class="line">2、不同Partition剩余replica按照一定的偏移量紧跟着各自的第一个replica</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="删除topic"   >
+          <a href="#删除topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh  --delete --topic tpc_1 --zookeeper node1：2181</span><br><span class="line"></span><br><span class="line">#（异步线程去删除）删除 topic,需要一个参数处于启用状态: delete.topic.enable = true,否则删不掉</span><br><span class="line"></span><br><span class="line">#使用 kafka-topics.sh 脚本删除主题的行为本质上只是在 ZooKeeper 中的 /admin/delete_topics 路径下 建一个与待删除主题同名的节点,以标记该主题为待删除的状态。与创建主题相同的是,真正删除主题的动作也是由 Kafka 的控制器负责完成的。</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="查看topic"   >
+          <a href="#查看topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看topic" class="headerlink" title="查看topic"></a>查看topic</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#(1)列出当前系统中的所有 topic </span><br><span class="line">bin/kafka-topics.sh --zookeeper node1:2181,node2:2181,node3:2181 --list</span><br><span class="line"></span><br><span class="line">#(2)查看 topic 详细信息</span><br><span class="line">bin/kafka-topics.sh --create --topic tpc_5-6   --zookeeper node1:2181 --replica-assignment 0:1,1:2</span><br><span class="line">bin/kafka-topics.sh --describe --topic tpc_5-6 --zookeeper node1:2181 </span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="增加分区数"   >
+          <a href="#增加分区数" class="heading-link"><i class="fas fa-link"></i></a><a href="#增加分区数" class="headerlink" title="增加分区数"></a>增加分区数</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --alter --topic tpc_1 --partitions 3 --zookeeper node1:2181</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="动态配置topic-参数"   >
+          <a href="#动态配置topic-参数" class="heading-link"><i class="fas fa-link"></i></a><a href="#动态配置topic-参数" class="headerlink" title="动态配置topic 参数"></a>动态配置topic 参数</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#通过管理命令,可以为已创建的 topic 增加、修改、删除 topic level 参数</span><br><span class="line"></span><br><span class="line">#添加、修改配置参数(开启压缩发送传输种提高kafka消息吞吐量的有效办法(‘gzip’, ‘snappy’, ‘lz4’, ‘zstd’))</span><br><span class="line"></span><br><span class="line">bin/kafka-configs.sh --zookeeper node1:2181 --entity-type topics --entity-name tpc_1 --alter --add-config compression.type=gzip </span><br><span class="line"></span><br><span class="line">#删除配置参数</span><br><span class="line">bin/kafka-configs.sh --zookeeper node1:2181 --entity-type topics --entity-name tpc_1 --alter --delete-config compression.type</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="生产消息到Kafka并进行消费"   >
+          <a href="#生产消息到Kafka并进行消费" class="heading-link"><i class="fas fa-link"></i></a><a href="#生产消息到Kafka并进行消费" class="headerlink" title="生产消息到Kafka并进行消费"></a>生产消息到Kafka并进行消费</h1>
+      <p>使用Kafka内置的测试程序，生产一些消息到Kafka的tpc_1主题中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#example1-kafka-console-producer</span><br><span class="line">bin/kafka-console-producer.sh --broker-list node1:9092, node2:9092, node3:9092 --topic tpc_1</span><br><span class="line"></span><br><span class="line">&gt;hello word </span><br><span class="line">&gt;kafka </span><br><span class="line">&gt;nihao</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#example2-kafka-console-consumer</span><br><span class="line">#(1)消费消息(从头开始)</span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server node1:9092, node2:9092, node1:9092 --topic tpc_1 --from-beginning</span><br><span class="line"></span><br><span class="line">#(2)指定要消费的分区,和要消费的起始 offset </span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server node1:9092,node2:9092,node3:9092 --topic tcp_1 --offset 2 --partition 0</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="配置管理-kafka-configs"   >
+          <a href="#配置管理-kafka-configs" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置管理-kafka-configs" class="headerlink" title="配置管理 kafka-configs"></a>配置管理 kafka-configs</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#示例:添加 topic 级别参数</span><br><span class="line">bin/kafka-configs.sh --zookeeper localhost:2181 --alter --entity-type topics --entity-name tpc_2 --add-config cleanup.policy=compact , max.message.bytes=10000</span><br><span class="line"></span><br><span class="line">#使用 kafka-configs.sh 脚本来变更( alter )配置时,会在 ZooKeeper 中创建一个命名形式为: /config/&lt;entity-type&gt;/&lt;ent ity name &gt;的节点,并将变更的配置写入这个节点</span><br></pre></td></tr></table></div></figure>
+
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Kafka%E9%85%8D%E7%BD%AE/">Kafka配置</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-24</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="安装kafka-集群"   >
+          <a href="#安装kafka-集群" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装kafka-集群" class="headerlink" title="安装kafka 集群"></a>安装kafka 集群</h1>
+      <p>上传压缩包到&#x2F;export&#x2F;server目录下</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv kafka_2.12-2.4.1.tgz /export/server</span><br></pre></td></tr></table></div></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf kafka_2.12-2.4.1.tgz</span><br></pre></td></tr></table></div></figure>
+
+<p>进入配置文件目录</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/kafka_2.11-2.0.0/config</span><br></pre></td></tr></table></div></figure>
+
+<p>编辑配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vi server.properties</span><br><span class="line">加入一下内容；</span><br><span class="line">#为依次增长的:0、1、2、3、4,集群中唯一 id --》从0开始，每台不能重复，第一块要改的</span><br><span class="line">broker.id=0 </span><br><span class="line"></span><br><span class="line">----Logbasic------</span><br><span class="line">#数据存储的目录，第二块要改的</span><br><span class="line">log.dirs=/export/data/kafka-logs  </span><br><span class="line"></span><br><span class="line">---zookeeper----</span><br><span class="line">#指定 zk 集群地址，第四块要改的</span><br><span class="line">zookeeper.connect=node1:2181,node2:2181,node3:2181</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/kfk/1.png"></p>
+<p>将node1内容分发到node2，node3中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /export/server/kafka_2.12-2.4.1 root@node2: /export/server</span><br><span class="line">scp -r /export/server/kafka_2.12-2.4.1 root@node3: /export/server</span><br></pre></td></tr></table></div></figure>
+
+<p>配置环境变量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">进入profile；</span><br><span class="line">vi /etc/profile </span><br><span class="line">添加一下内容；</span><br><span class="line">export KAFKA_HOME=/export/server/kafka </span><br><span class="line">export PATH=$PATH:$KAFKA_HOME/bin</span><br></pre></td></tr></table></div></figure>
+
+<p>添加后重置环境</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+<p>分发环境变量至node2，node3</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/profile root@node2: /etc/profile</span><br><span class="line">scp /etc/profile root@node3: /etc/profile</span><br></pre></td></tr></table></div></figure>
+
+<p>分别在node2和node3上修改配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">broker.id=1 </span><br><span class="line">broker.id=2</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="启停集群-在各个节点上启动"   >
+          <a href="#启停集群-在各个节点上启动" class="heading-link"><i class="fas fa-link"></i></a><a href="#启停集群-在各个节点上启动" class="headerlink" title="启停集群(在各个节点上启动)"></a>启停集群(在各个节点上启动)</h1>
+      <p>启动集群</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-server-start.sh -daemon /export/server/kafka/config/server.properties </span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/kfk/2.png"></p>
+<p>停止集群</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-server-stop.sh stop</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/kfk/3.png"></p>
+
+        <h1 id="kafka一键启停脚本"   >
+          <a href="#kafka一键启停脚本" class="heading-link"><i class="fas fa-link"></i></a><a href="#kafka一键启停脚本" class="headerlink" title="kafka一键启停脚本"></a>kafka一键启停脚本</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">if [ $# -eq 0 ]</span><br><span class="line">then</span><br><span class="line">echo &quot;please input param:start stop&quot;</span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">if [ $1 = start  ]</span><br><span class="line">then</span><br><span class="line">for i in &#123;1..3&#125;</span><br><span class="line">do</span><br><span class="line">echo &quot;$&#123;1&#125;ing node$&#123;i&#125;&quot;</span><br><span class="line">ssh node$&#123;i&#125; &quot;source /etc/profile;/export/server/kafka/bin/kafka-server-start.sh -daemon /export/server/kafka/config/server.properties&quot;</span><br><span class="line">done</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ $1 = stop ]</span><br><span class="line">then</span><br><span class="line">for i in &#123;1..3&#125;</span><br><span class="line">do</span><br><span class="line">ssh node$&#123;i&#125; &quot;source /etc/profile;/export/server/kafka/bin/kafka-server-stop.sh&quot;</span><br><span class="line">done</span><br><span class="line">fi</span><br><span class="line">fi</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/kfk/4.png"></p>
+
+        <h1 id="kafka命令行操作"   >
+          <a href="#kafka命令行操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#kafka命令行操作" class="headerlink" title="kafka命令行操作"></a>kafka命令行操作</h1>
       
-        <h2 id="（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下"   >
-          <a href="#（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下" class="heading-link"><i class="fas fa-link"></i></a><a href="#（1）把资源包Anaconda3-2021-05-Linux-x86-64-sh文件放到文件夹下" class="headerlink" title="（1）把资源包Anaconda3-2021.05-Linux-x86_64.sh文件放到文件夹下"></a>（1）把资源包Anaconda3-2021.05-Linux-x86_64.sh文件放到文件夹下</h2>
-      <p><img src="/../image/3.png"></p>
+        <h2 id="创建topic"   >
+          <a href="#创建topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#基本方式</span><br><span class="line">./kafka-topics.sh --create --topic tpc_1 --partitions 2 --replication-factor 2 --zookeeper node1:2181</span><br><span class="line">bootstrap方式</span><br><span class="line">创建名为test的主题</span><br><span class="line">bin/kafka-topics.sh --create --bootstrap-server node1:9092 --topic test</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="（2）运行Anaconda3-2021-05-Linux-x86-64-sh"   >
-          <a href="#（2）运行Anaconda3-2021-05-Linux-x86-64-sh" class="heading-link"><i class="fas fa-link"></i></a><a href="#（2）运行Anaconda3-2021-05-Linux-x86-64-sh" class="headerlink" title="（2）运行Anaconda3-2021.05-Linux-x86_64.sh"></a>（2）运行Anaconda3-2021.05-Linux-x86_64.sh</h2>
-      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></div></figure>
+<p><img src="/../image/kfk/5.png"></p>
 
-<p><img src="/../image/4.png"></p>
-<p><img src="/../image/5.png"></p>
+        <h2 id="查看目前Kafka中的主题"   >
+          <a href="#查看目前Kafka中的主题" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看目前Kafka中的主题" class="headerlink" title="查看目前Kafka中的主题"></a>查看目前Kafka中的主题</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server node1:9092</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="3-出现（base）即为安装成功"   >
-          <a href="#3-出现（base）即为安装成功" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-出现（base）即为安装成功" class="headerlink" title="(3)出现（base）即为安装成功"></a>(3)出现（base）即为安装成功</h2>
-      <p><img src="/../image/6.png" alt="6"></p>
+<p><img src="/../image/kfk/6.png"></p>
 
-        <h1 id="3、创建虚拟环境"   >
-          <a href="#3、创建虚拟环境" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、创建虚拟环境" class="headerlink" title="3、创建虚拟环境"></a>3、创建虚拟环境</h1>
-      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pyspark python=3.8</span><br><span class="line">conda activate pyspark</span><br><span class="line">pipinstallpyhive pyspark jieba -i https://pypi.tuna.tsinghua.edu.cn</span><br><span class="line">/simple</span><br></pre></td></tr></table></div></figure>
+        <h2 id="删除topic"   >
+          <a href="#删除topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh  --delete --topic tpc_1 --zookeeper node1：2181</span><br></pre></td></tr></table></div></figure>
 
+<p><img src="/../image/kfk/7.png"></p>
 
-        <h1 id="4、修改环境变量配置Spark由如下5个环境变量需要设置"   >
-          <a href="#4、修改环境变量配置Spark由如下5个环境变量需要设置" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、修改环境变量配置Spark由如下5个环境变量需要设置" class="headerlink" title="4、修改环境变量配置Spark由如下5个环境变量需要设置"></a>4、修改环境变量配置Spark由如下5个环境变量需要设置</h1>
-      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SPARK_HOME: 表示Spark安装路径在哪里 </span><br><span class="line"></span><br><span class="line">PYSPARK_PYTHON: 表示Spark想运行Python程序, 那么去哪里找python执行器</span><br><span class="line"></span><br><span class="line">JAVA_HOME: 告知Spark Java在哪里</span><br><span class="line"></span><br><span class="line">HADOOP_CONF_DIR: 告知Spark Hadoop的配置文件在哪里</span><br><span class="line"></span><br><span class="line">HADOOP_HOME: 告知Spark  Hadoop安装在哪里</span><br></pre></td></tr></table></div></figure>
+        <h2 id="列出当前系统中的所有-topic"   >
+          <a href="#列出当前系统中的所有-topic" class="heading-link"><i class="fas fa-link"></i></a><a href="#列出当前系统中的所有-topic" class="headerlink" title="列出当前系统中的所有 topic"></a>列出当前系统中的所有 topic</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper node1:2181,node2:2181,node3:2181 --list</span><br></pre></td></tr></table></div></figure>
 
-<p>这5个环境变量 都需要配置在:&#x2F;etc&#x2F;profile中<img src="/../image/7.png"></p>
-<p>PYSPARK_PYTHON和 JAVA_HOME 需要同样配置在:</p>
-<p>&#x2F;root&#x2F;.bashrc中</p>
-<p><img src="/../image/8.png"></p>
+<p><img src="/../image/kfk/8.png"></p>
 
-        <h1 id="5、上传Spark安装包"   >
-          <a href="#5、上传Spark安装包" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、上传Spark安装包" class="headerlink" title="5、上传Spark安装包"></a>5、上传Spark安装包</h1>
-      <p>资料中提供了: spark-3.2.0-bin-hadoop3.2.tgz</p>
-<p>上传这个文件到Linux服务器中</p>
-<p><img src="/../image/9.png"></p>
+        <h2 id="查看-topic-详细信息"   >
+          <a href="#查看-topic-详细信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看-topic-详细信息" class="headerlink" title="查看 topic 详细信息"></a>查看 topic 详细信息</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --topic tpc_1   --zookeeper node1:2181 --replica-assignment 0:1,1:2</span><br><span class="line">bin/kafka-topics.sh --describe --topic tpc_1 --zookeper node1:2181</span><br></pre></td></tr></table></div></figure>
 
-        <h1 id="6、解压"   >
-          <a href="#6、解压" class="heading-link"><i class="fas fa-link"></i></a><a href="#6、解压" class="headerlink" title="6、解压"></a>6、解压</h1>
-      <p>将其解压, 课程中将其解压(安装)到: &#x2F;export&#x2F;server内.</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf spark-3.2.0-bin-hadoop3.2.tgz -C /export/server/</span><br></pre></td></tr></table></div></figure>
+<p><img src="/../image/kfk/9.png"></p>
 
-<p>由于spark目录名称很长, 给其一个软链接:</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s/export/server/spark-3.2.0-bin-hadoop3.2 /export/server/spark</span><br></pre></td></tr></table></div></figure>
+        <h2 id="增加分区数"   >
+          <a href="#增加分区数" class="heading-link"><i class="fas fa-link"></i></a><a href="#增加分区数" class="headerlink" title="增加分区数"></a>增加分区数</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --alter --topic tpc_1 --partitions 3 --zookeeper node1:2181</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/../image/10.png"></p>
+<p><img src="/../image/kfk/10.png"></p>
 
-        <h1 id="7、测试"   >
-          <a href="#7、测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#7、测试" class="headerlink" title="7、测试"></a>7、测试</h1>
-      <figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/pyspark</span><br></pre></td></tr></table></div></figure>
+        <h2 id="消费消息-从头开始"   >
+          <a href="#消费消息-从头开始" class="heading-link"><i class="fas fa-link"></i></a><a href="#消费消息-从头开始" class="headerlink" title="消费消息(从头开始)"></a>消费消息(从头开始)</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-consumer.sh --bootstrap-server node1:9092, node2:9092, node1:9092 --topic tpc_1 --from-beginning</span><br></pre></td></tr></table></div></figure>
 
-<p>bin&#x2F;pyspark 程序, 可以提供一个交互式的 Python解释器环境, 在这里面可以写普通python代码, 以及spark代码</p>
-<p><img src="/../image/11.png"></p>
-<p><img src="/../image/12.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Git/">Git部署</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="一、git下载与安装"   >
-          <a href="#一、git下载与安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#一、git下载与安装" class="headerlink" title="一、git下载与安装"></a>一、git下载与安装</h1>
-      <p>git下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://git-scm.com/download" >https://git-scm.com/download</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><img src="/../image/git/1.png"></p>
-<p>附件：</p>
-<p><img src="/../image/git/2.png"></p>
-<p>git安装：</p>
-<p>1、按照附件的顺序，直接下一步安装即可。</p>
-<p>2、安装的过程中需要填写一个邮箱和用户名(任意即可)</p>
-<p>3、安装完毕请重启资源管理器,或者重启电脑</p>
-<p>4、更改语言</p>
-<p><img src="/../image/git/3.png"></p>
-<p><img src="/../image/git/4.png"></p>
-<p><img src="/../image/git/5.png"></p>
+<p><img src="/../image/kfk/11.png"></p>
 
-        <h1 id="二、git工作流程"   >
-          <a href="#二、git工作流程" class="heading-link"><i class="fas fa-link"></i></a><a href="#二、git工作流程" class="headerlink" title="二、git工作流程"></a>二、git工作流程</h1>
+        <h2 id="指定要消费的分区-和要消费的起始-offset"   >
+          <a href="#指定要消费的分区-和要消费的起始-offset" class="heading-link"><i class="fas fa-link"></i></a><a href="#指定要消费的分区-和要消费的起始-offset" class="headerlink" title="指定要消费的分区,和要消费的起始 offset"></a>指定要消费的分区,和要消费的起始 offset</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-consumer.sh --bootstrap-server node1:9092,node2:9092,node3:9092 --topic tcp_1 --offset 2 --partition 0</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/../image/kfk/12.png"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/25/Kafka%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Kafka环境配置</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-21</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="一、安装zookeeper"   >
+          <a href="#一、安装zookeeper" class="heading-link"><i class="fas fa-link"></i></a><a href="#一、安装zookeeper" class="headerlink" title="一、安装zookeeper"></a>一、安装zookeeper</h1>
+      <p>Kafka集群是必须要有ZooKeeper</p>
+
+        <h1 id="二、安装kadka集群"   >
+          <a href="#二、安装kadka集群" class="heading-link"><i class="fas fa-link"></i></a><a href="#二、安装kadka集群" class="headerlink" title="二、安装kadka集群"></a>二、安装kadka集群</h1>
       
-        <h2 id="git初始化"   >
-          <a href="#git初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#git初始化" class="headerlink" title="git初始化"></a>git初始化</h2>
-      <p>初始化一个本地仓库，创建的文件夹下有一个.git 文件生成</p>
-<p> (1)、新建测试文件夹</p>
-<p><img src="/../image/git/6.png"></p>
-<p>(2)、进入文件夹，右键创建版本库</p>
-<p><img src="/../image/git/7.png"></p>
-<p><img src="/../image/git/8.png"></p>
+        <h2 id="1、上传安装title-Kafka环境配置包"   >
+          <a href="#1、上传安装title-Kafka环境配置包" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、上传安装title-Kafka环境配置包" class="headerlink" title="1、上传安装title: Kafka环境配置包"></a>1、上传安装title: Kafka环境配置包</h2>
+      <p>上传kafka_2.12-2.4.1.tgz到&#x2F;export&#x2F;server目录下，解压</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server</span><br><span class="line">tar -zxvf kafka_2.12-2.4.1.tgz</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="git添加文件"   >
-          <a href="#git添加文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#git添加文件" class="headerlink" title="git添加文件"></a>git添加文件</h2>
-      <p>(1)、在本地仓库中新建一个文本文件</p>
-<p><img src="/../image/git/9.png"></p>
-<p>(2)、选中新建的文件 –&gt;右键 –&gt;TortoiseGit –&gt; 添加</p>
-<p><img src="/../image/git/10.png"></p>
 
-        <h2 id="修改文件，与再次提交文件"   >
-          <a href="#修改文件，与再次提交文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#修改文件，与再次提交文件" class="headerlink" title="修改文件，与再次提交文件"></a>修改文件，与再次提交文件</h2>
-      <p>修改文件以后,文件上多了一个红色感叹号,表示上次提交后该文件被修改过提交后文件图标又变成绿色</p>
-<p>（1）、修改文件</p>
-<p><img src="/../image/git/11.png" alt="11"></p>
-<p>（2）、再次提交</p>
-<p><img src="/../image/git/12.png"></p>
+        <h2 id="2、修改配置文件"   >
+          <a href="#2、修改配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、修改配置文件" class="headerlink" title="2、修改配置文件"></a>2、修改配置文件</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 进入配置文件目录</span><br><span class="line">cd /export/server/kafka_2.11-2.0.0/config</span><br><span class="line"># 编辑配置文件</span><br><span class="line">vi server.properties</span><br><span class="line"></span><br><span class="line"># 为依次增长的:0、1、2、3、4,集群中唯一 id从0开始，每台不能重复，第一块要改的</span><br><span class="line">broker.id=0 </span><br><span class="line"></span><br><span class="line">----Logbasic------</span><br><span class="line">#数据存储的目录，第二块要改的</span><br><span class="line">log.dirs=/export/data/kafka-logs  </span><br><span class="line"></span><br><span class="line">---zookeeper----</span><br><span class="line">#指定 zk 集群地址，第四块要改的</span><br><span class="line">zookeeper.connect=node1:2181,node2:2181,node3:2181</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="修改文件-不提交和上一个版本比较差异-diff"   >
-          <a href="#修改文件-不提交和上一个版本比较差异-diff" class="heading-link"><i class="fas fa-link"></i></a><a href="#修改文件-不提交和上一个版本比较差异-diff" class="headerlink" title="修改文件,不提交和上一个版本比较差异(diff)"></a>修改文件,不提交和上一个版本比较差异(diff)</h2>
-      <p>1、修改文件，但不提交</p>
-<p>2、选中文件–&gt;右键–&gt; TortoiseGit–&gt; 比较差异</p>
-<p><img src="/../image/git/13.png"></p>
 
-        <h2 id="查看提交历史记录"   >
-          <a href="#查看提交历史记录" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看提交历史记录" class="headerlink" title="查看提交历史记录"></a>查看提交历史记录</h2>
-      <p>1、选中文件</p>
-<p>2、右键–&gt; TortoiseGit–&gt; 显示日志</p>
-<p><img src="/../image/git/14.png"></p>
+        <h2 id="3、分发kafka"   >
+          <a href="#3、分发kafka" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、分发kafka" class="headerlink" title="3、分发kafka"></a>3、分发kafka</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /export/server/</span><br><span class="line">syncfile /export/server/kafka_2.12-2.4.1</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="回退至历史版本"   >
-          <a href="#回退至历史版本" class="heading-link"><i class="fas fa-link"></i></a><a href="#回退至历史版本" class="headerlink" title="回退至历史版本"></a>回退至历史版本</h2>
-      <p>1、右键–&gt; TortoiseGit–&gt; 显示日志</p>
-<p>2、选中某个版本–&gt; 进行如下操作</p>
-<p><img src="/../image/git/15.png" alt="15"></p>
-<p><img src="/../image/git/16.png"></p>
-<p><img src="/../image/git/17.png"></p>
 
-        <h2 id="本地删除与恢复"   >
-          <a href="#本地删除与恢复" class="heading-link"><i class="fas fa-link"></i></a><a href="#本地删除与恢复" class="headerlink" title="本地删除与恢复"></a>本地删除与恢复</h2>
-      <p>直接选中文件删除的话,其实只是删除了本地工作区的文件,并没有删除远程仓库中的文件  随时可以回退的, 比如进行如下操作</p>
-<p>1、文件删除</p>
-<p><img src="/../image/git/18.png"></p>
-<p>2、空白处右键–&gt; TortoiseGit–&gt; 还原（文件又被恢复了）</p>
-<p><img src="/../image/git/19.png"></p>
+        <h2 id="4、配置环境变量"   >
+          <a href="#4、配置环境变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#4、配置环境变量" class="headerlink" title="4、配置环境变量"></a>4、配置环境变量</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile </span><br><span class="line"></span><br><span class="line">export KAFKA_HOME=/export/server/kafka </span><br><span class="line">export PATH=$PATH:$KAFKA_HOME/bin </span><br><span class="line">source /etc/profile </span><br><span class="line">#注意:还需要分发环境变量</span><br><span class="line">syncfile /etc/profile</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="从版本库中删除"   >
-          <a href="#从版本库中删除" class="heading-link"><i class="fas fa-link"></i></a><a href="#从版本库中删除" class="headerlink" title="从版本库中删除"></a>从版本库中删除</h2>
-      <p>想要将某个文件从服务器删除,需要进行如下操作</p>
-<p>1、删除文件,和上面的操作一样</p>
-<p><img src="/../image/git/20.png"></p>
-<p>2、提交,此时服务文件已经删除了(历史版本还在,还是可以恢复)</p>
-<p><img src="/../image/git/21.png"></p>
 
-        <h2 id="从版本库删除-但是不删除本地"   >
-          <a href="#从版本库删除-但是不删除本地" class="heading-link"><i class="fas fa-link"></i></a><a href="#从版本库删除-但是不删除本地" class="headerlink" title="从版本库删除,但是不删除本地"></a>从版本库删除,但是不删除本地</h2>
-      <p>可以如下操作,只删除服务器上的文件,但是本地文件并不删除，删除之后需要提交,才会真正的从服务器删除</p>
-<p>选中文件–&gt; TortoiseGit–&gt; 删除并保留本地副本</p>
-<p><img src="/../image/git/22.png"></p>
+        <h2 id="5、分别在node2和node3上修改配置文件"   >
+          <a href="#5、分别在node2和node3上修改配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#5、分别在node2和node3上修改配置文件" class="headerlink" title="5、分别在node2和node3上修改配置文件"></a>5、分别在node2和node3上修改配置文件</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim /export/server/kafka/config/server.propertie</span><br><span class="line">broker.id=1 </span><br><span class="line">broker.id=2</span><br><span class="line">#(broker.id 不能重复)</span><br><span class="line"></span><br><span class="line">#启停集群(在各个节点上启动)</span><br><span class="line">#启动集群</span><br><span class="line">kafka-server-start.sh -daemon /export/server/kafka/config/server.properties </span><br><span class="line">#停止集群</span><br><span class="line">kafka-server-stop.sh stop</span><br></pre></td></tr></table></div></figure>
 
-        <h2 id="忽略提交"   >
-          <a href="#忽略提交" class="heading-link"><i class="fas fa-link"></i></a><a href="#忽略提交" class="headerlink" title="忽略提交"></a>忽略提交</h2>
-      <p>有时候一些文件是不需要提交的比如说idea&#x2F;eclipse 开发的代码自动生成的配置文件，接下来配置不提交</p>
-<p><img src="/../image/git/23.png"></p>
-<p><img src="/../image/git/24.png"></p>
-<p><img src="/../image/git/25.png"></p>
-
-        <h1 id="TortoiseGit-操作本地仓库-分支"   >
-          <a href="#TortoiseGit-操作本地仓库-分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#TortoiseGit-操作本地仓库-分支" class="headerlink" title="TortoiseGit 操作本地仓库(分支)"></a>TortoiseGit 操作本地仓库(分支)</h1>
-      
-        <h2 id="创建分支"   >
-          <a href="#创建分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2>
-      <p>默认情况下使用主分支(master)，在主分支上操作创建分支</p>
-<p>空白处右键–&gt; TortoiseGit–&gt; 创建分支</p>
-<p><img src="/../image/git/26.png"></p>
-
-        <h2 id="查看分支"   >
-          <a href="#查看分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
-<p><img src="/../image/git/27.png"></p>
-
-        <h2 id="切换分支"   >
-          <a href="#切换分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 切换&#x2F;检出</p>
-<p><img src="/../image/git/28.png"></p>
-<p><img src="/../image/git/29.png"></p>
-
-        <h2 id="分支的合并"   >
-          <a href="#分支的合并" class="heading-link"><i class="fas fa-link"></i></a><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h2>
-      <p>将代码切换到分支1,然后写属于需求1 的代码并提交，把需求1 开发完毕通过合并分支把需求1 的代码合并到主分支</p>
-<p>1、切换到主版本</p>
-<p>2、合并即可将需求1写的代码合并至主分支</p>
-<p>空白处右键–&gt; TortoiseGit–&gt; 合并</p>
-<p><img src="/../image/git/30.png"></p>
-<p><img src="/../image/git/31.png"></p>
-
-        <h2 id="删除分支"   >
-          <a href="#删除分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
-<p><img src="/../image/git/32.png"></p>
-
-        <h2 id="冲突处理"   >
-          <a href="#冲突处理" class="heading-link"><i class="fas fa-link"></i></a><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h2>
-      <p>1、创建名为张三和名为李四的分支</p>
-<p>2、在这两个分支中创建MathUtil.txt,张三的MathUtil.txt第一行写一个方法 add(int [] args)</p>
-<p>李四的MathUtil.txt第一行写一个方法 add(int a int b)</p>
-<p>3、在主分支上合并两个分支（合并时会报错,即为冲突）</p>
-<p>4、选中冲突的文件(带黄色感叹号的文件都是冲突的文件,如果有多个需要逐一处理)</p>
-<p>5、右键–&gt; 编辑冲突</p>
-<p>6、处理完毕后，标记已解决</p>
-<p><img src="/../image/git/33.png"></p>
-<p><img src="/../image/git/34.png"></p>
-<p><img src="/../image/git/35.png"></p>
-<p><img src="/../image/git/36.png"></p>
-
-        <h2 id="标签创建"   >
-          <a href="#标签创建" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签创建" class="headerlink" title="标签创建"></a>标签创建</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 创建标签</p>
-<p><img src="/../image/git/37.png"></p>
-
-        <h2 id="标签切换"   >
-          <a href="#标签切换" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签切换" class="headerlink" title="标签切换"></a>标签切换</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 切换&#x2F;检出</p>
-<p><img src="/../image/git/38.png"></p>
-
-        <h2 id="标签删除"   >
-          <a href="#标签删除" class="heading-link"><i class="fas fa-link"></i></a><a href="#标签删除" class="headerlink" title="标签删除"></a>标签删除</h2>
-      <p>空白处右键–&gt; TortoiseGit–&gt; 版本分支图</p>
-<p><img src="/../image/git/39.png"></p>
-<p><img src="/../image/git/40.png"></p>
-
-        <h2 id="创建远程仓库"   >
-          <a href="#创建远程仓库" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h2>
-      <p>代码不能总是放在本地,因为总是放在本地,一旦电脑出现故障,数据将丢失，可以搭建一个单间的局域网服务器，共享本地仓库中的代码，除了自己搭建服务器,其实也可以使用一些免费的远程仓库，接下来在码云（<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.gitee.com)中创建远程仓库/" >www.gitee.com）中创建远程仓库</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><img src="/../image/git/41.png"></p>
-
-        <h2 id="把本地代码推送到远端"   >
-          <a href="#把本地代码推送到远端" class="heading-link"><i class="fas fa-link"></i></a><a href="#把本地代码推送到远端" class="headerlink" title="把本地代码推送到远端"></a>把本地代码推送到远端</h2>
-      <p>空白处右键–&gt;Git同步</p>
-<p><img src="/../image/git/42.png"></p>
-<p><img src="/../image/git/43.png"></p>
-<p><img src="/../image/git/44.png"></p>
-
-        <h2 id="从远程仓库克隆代码"   >
-          <a href="#从远程仓库克隆代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#从远程仓库克隆代码" class="headerlink" title="从远程仓库克隆代码"></a>从远程仓库克隆代码</h2>
-      <p>新建一个文件夹本地仓库02，进入然后进行如下操作</p>
-<p><img src="/../image/git/45.png"></p>
-<p><img src="/../image/git/46.png"></p>
-<p><img src="D:/nodejs/j_test/source/image/git/47.png"></p>
-
-        <h2 id="代码的修改与提交-查看历史"   >
-          <a href="#代码的修改与提交-查看历史" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码的修改与提交-查看历史" class="headerlink" title="代码的修改与提交,查看历史"></a>代码的修改与提交,查看历史</h2>
-      <p>1、此时修改代码就不能仅仅是提交到本地了,提交完毕应该推送到远端服务器</p>
-<p>2、此时如果别人从远端仓库下载最新的代码其实是可以看到代码修改记录的</p>
-<p>空白处右键–&gt;Git提交-&gt;“master”</p>
-<p><img src="/../image/git/48.png"></p>
-<p>选中文件–&gt;TortoiseGit–&gt;显示日志</p>
-<p><img src="/../image/git/49.png"></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-07</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
-
-        <h2 id="Quick-Start"   >
-          <a href="#Quick-Start" class="heading-link"><i class="fas fa-link"></i></a><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
-      
-        <h3 id="Create-a-new-post"   >
-          <a href="#Create-a-new-post" class="heading-link"><i class="fas fa-link"></i></a><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Run-server"   >
-          <a href="#Run-server" class="heading-link"><i class="fas fa-link"></i></a><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Generate-static-files"   >
-          <a href="#Generate-static-files" class="heading-link"><i class="fas fa-link"></i></a><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Deploy-to-remote-sites"   >
-          <a href="#Deploy-to-remote-sites" class="heading-link"><i class="fas fa-link"></i></a><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2023/06/14/Spark(ha)/">Spark(ha)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2023-06-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2023-06-14</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>1、启动Zookeeper、HDFS</p>
-<p><img src="/../image/38.png"></p>
-<p>2、在spark-env.sh中, 删除: SPARK_MASTER_HOST&#x3D;node1</p>
-<p><img src="/../image/39.png"></p>
-<p>3、在spark-env.sh中增加：</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPARK_DAEMON_JAVA_OPTS=&quot;-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir=/spark-ha&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">spark.deploy.recoveryMode 指定HA模式 基于Zookeeper实现</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定Zookeeper的连接地址</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定在Zookeeper中注册临时节点的路径</span></span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/40.png"></p>
-<p>4、将spark-env.sh 分别分发到node2、node3上</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp spark-env.sh node2:/export/server/spark/conf/</span><br><span class="line">scp spark-env.sh node3:/export/server/spark/conf/</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/41.png"></p>
-<p>5、停止当前StandAlone集群</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/stop-all.sh</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/42.png"></p>
-<p><img src="/../image/43.png"></p>
-<p>6、启动集群，在node1上 启动一个master 和全部worker</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-all.sh</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/44.png"></p>
-<p>在node2上启动master</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-master.sh</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/45.png"></p>
-<p>7、进入node1、node2 8081端口</p>
-<p><img src="/../image/46.png"></p>
-<p><img src="/../image/47.png"></p>
-<p>8、提交一个spark任务到当前<code>alive</code>master上:</p>
-<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit--masterspark://node1:7077 /export/server/spark/examples/src/main/python/pi.py 1000</span><br></pre></td></tr></table></div></figure>
-
-<p><img src="/../image/48.png"></p>
-<p>9、kill node1中master进程</p>
-<p>kill -9 11354</p>
-<p><img src="/../image/49.png"></p>
-<p><img src="/../image/50.png"></p>
-<p>10、查看node2中master进程</p>
-<p><img src="/../image/51.png"></p>
-</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
+<p><img src="/../image/kafka/1.png"></p>
+</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v6.3.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
